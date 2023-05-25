@@ -1,0 +1,243 @@
+/* NavBar: */
+#neubar {
+    background: linear-gradient(to top right, rgba(43, 42, 42, 0.8), rgba(89, 88, 88, 0.8), rgba(43, 42, 42, 0.8));
+    border-bottom: 2px solid #b18953;
+    z-index: 99999;
+}
+
+#neubar .dropdown-menu a:hover {
+    color: #454545; 
+}
+
+#neubar .nav-item {
+    margin : auto 4px;
+}
+
+#neubar a {
+    padding-left:12px;
+    padding-right:12px;
+}
+
+#neubar .dropdown-menu {
+    background : #545454;
+}
+
+a.navbar-brand {
+    color: #454545;
+}
+
+
+
+
+
+/* Slogan:                                  ///////////////////////////////////////////////////////////////////////////////////*/
+.gradient-bg {
+    background: linear-gradient(to top right, #1c1b1b, #6a6a6a);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset -10px 310px 100px -150px #b18953;
+}
+
+.centered-img {
+    max-width: 100%;
+    height: auto;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    border-radius: 40px;
+}
+
+
+
+/* Our Vision & Mission Section:            ///////////////////////////////////////////////////////////////////////////////////*/
+.our-vision-section {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+    opacity: 0; /* Set the opacity to 0 */
+    visibility: hidden; /* Hide the section initially */
+    transition: opacity 1s, visibility 1s;
+}
+
+
+
+/* About Us Section:                        ///////////////////////////////////////////////////////////////////////////////////*/
+.about-us-section {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+    opacity: 0; /* Set the opacity to 0 */
+    visibility: hidden; /* Hide the section initially */
+    transition: opacity 1s, visibility 1s;
+}
+
+.about-us-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+
+
+/* Footer:                                  ///////////////////////////////////////////////////////////////////////////////////*/
+.footer {
+    background: linear-gradient(to top left, #7e002f, #1c000a);
+    /* background-color: #620024; */
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.footer p {
+    margin-bottom: 0;
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: transform 0.3s;
+}
+
+.social-icons a:hover {
+    transform: scale(1.2);
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////// */
+
+.general-body{
+    background: linear-gradient(to top right,#1c000a, #393939, #6a6a6a);
+    box-shadow: inset -10px 310px 100px -150px #b18953;
+}
+
+.btn-container {
+text-align: center;
+margin-bottom: 20px;
+margin-top: 20px;
+position: fixed;
+right: 7%;
+z-index: 9999;
+}
+
+.custom-table th {
+color: white;
+text-align: center; /* Center align the content */
+}
+.table-head{
+    background: linear-gradient(to top right, #010101, #6a6a6a);
+}
+
+#table{
+    border: 2px solid rgb(90, 90, 90);
+    background-color: #f8f9fa;
+}
+
+.custom-table td {
+text-align: center;
+}
+
+
+/* /////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* locations */
+.card, .btn{
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover, .btn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .image-container {
+flex-grow: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+max-height: 150px;
+}
+
+.image-container img {
+width: auto;
+height: 100%;
+object-fit: contain;
+max-width: 100%;
+}
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+
+.form-group .golden-form-label{
+    background: linear-gradient(to top right, #bb9158, #faf1b0);
+    padding: -7px -12px;
+    border: 2px solid #bb9158;
+    /* font-size: 1rem;
+    font-weight: bolder; */
+}
+
+.form-body{
+    background: linear-gradient(to top right, #b8b6b4, #e3e3e3);
+    margin-top: 120px;
+    border: 2px solid #bb9158;
+}
+
+.form-input-style .form-control, .form-input-style .form-select{
+    border: 2px solid #bb9158;
+}
+
+/* /////////////////////////////////////////////////////////////////////////////////// */
+
+/* Golden glowing button: */
+.golden-button {
+    text-decoration: none;
+    color: black;
+    background: linear-gradient(to top right, #bb9158, #faf1b0);
+    padding: 7px 30px;
+    border-radius: 4px;
+    border-color: #bb9158;
+    font-weight: normal;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+}
+.golden-button:hover {
+    color: rgba(255, 255, 255, 1);
+    background: linear-gradient(to bottom left, #8d4800, #e5c970);
+    box-shadow: 0px 0px 20px 15px #bb9158;
+}
+
+/* Red glowing button: */
+.red-button {
+    text-decoration: none;
+    color: black;
+    background: linear-gradient(to top right, #bb5858, #fab0b0);
+    padding: 7px 30px;
+    border-radius: 4px;
+    border-color: #bb5858;
+    font-weight: normal;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+}
+.red-button:hover {
+    color: rgba(255, 255, 255, 1);
+    background: linear-gradient(to bottom left, #8d0000, #e57070);
+    box-shadow: 0px 0px 20px 15px #bb5858;
+}
+
+/* ///////////////////////////////////////////////////////////// */
+
+
+.nowrap-text {
+    white-space: nowrap;
+}
+
+.min-width-div {
+    min-width: 150px;
+}
+  
+
+.general-body {
+    display: inline-block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+
+  

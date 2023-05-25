@@ -1,0 +1,33 @@
+{% include 'header.html' %} 
+
+  <div class="general-body min-vh-100">
+    <div class="container mt-5 pt-5">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="text-warning">All Locations:</h1>
+        <div class="btn-container " >
+          <a href="/locations/add_new_location" class="btn btn-warning btn-lg ">Add New Location</a>
+        </div>
+      </div>
+      <div class="row">
+        {% for one_location in all_locations %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 d-flex flex-column">
+            <div class="overflow-hidden text-center">
+              <img src="data:;base64,{{one_location.image_data}}" class="card-img-top mx-auto" style="height: 150px; width: auto;" alt="Image of {{one_location["name"]}}.">
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title text-center">{{one_location["name"]}}</h5>
+              <p class="card-text text-center">{{one_location["location_id"]}}</p>
+              <div class="mt-auto d-flex justify-content-around">
+                <a href="/locations/view_location/{{one_location["location_id"]}}" class="btn btn-warning me-2">View</a>
+                <a href="/locations/edit_location/{{one_location["location_id"]}}" class="btn btn-primary">Edit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+{%include 'footer.html'%}  

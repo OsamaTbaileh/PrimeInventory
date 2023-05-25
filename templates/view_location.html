@@ -1,0 +1,67 @@
+{% include 'header.html' %} 
+
+<div class="general-body min-vh-100">
+    <div class="container col-lg-10 px-4 py-3 mx-auto form-style rounded form-body">
+        <h2 class="py-3">Details of {{the_location[0].name}} location:</h2>
+
+        <div class="d-flex justify-content-center mb-3">
+            <img src="data:;base64,{{the_location[0].image_data}}" alt="Image of {{ the_location[0].name }} location." class="img-fluid rounded mx-auto" style="max-width: 40%;">
+        </div>    
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Location's ID:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{the_location[0].location_id}}
+            </p>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Location's Name:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{the_location[0].name}}
+            </p>
+        </div>
+
+        <div class="table-responsive">
+            <div class="mb-3 text-center">
+                <a href="/products/add_new_product/{{the_location[0].location_id}}" class="btn btn-warning btn-lg">Add New Product</a>
+            </div>
+
+            <table class="table custom-table table-hover" id="table">
+                <thead>
+                    <tr class="table-head">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price $</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for one_product in all_products %}
+                    <tr>
+                        <td>{{ one_product.product_id }}</td>
+                        <td>{{ one_product.product_name }}</td>
+                        <td>{{ one_product.price }}</td>
+                        <td>{{ one_product.product_quantity }}</td>
+                        <td>
+                            <form action="/products/delete_product/{{one_product.product_id}}" method="POST">
+                                <input type="hidden" name="product_id" value="{{ one_product.product_id }}">
+                                <div class="btn-group">
+                                    <a href="/products/view_product/{{ one_product.product_id }}/{{the_location[0].location_id}}" class="btn btn-success">View</a>
+                                    <a href="/products/edit_product/{{ one_product.product_id }}/{{the_location[0].location_id}}" class="btn btn-primary">Edit</a>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+{%include 'footer.html'%}  

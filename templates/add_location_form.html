@@ -1,0 +1,49 @@
+{% include 'header.html' %} 
+
+<div class="general-body min-vh-100">
+    <div class="container col-lg-7 px-4 py-3 mx-auto form-style rounded form-body">
+      <h2 class="py-3">Add New Location</h2>
+      <form action="/locations/add_new_location" method="post" enctype="multipart/form-data">
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="location-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Location's ID:</label>
+          <div class="col-sm-8 form-input-style ">
+            <input type="text" class="form-control" id="location-id" placeholder="Insert ID" name="location_id">
+          </div>
+        </div>
+  
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="location-name" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Location's Name:</label>
+          <div class="col-sm-8 form-input-style min-width-">
+            <input type="text" class="form-control" id="location-name" placeholder="Type the name here" name="location_name">
+          </div>
+        </div>
+  
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="upload-image" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Upload Image:</label>
+          <div class="col-sm-8 form-input-style ">
+            <input type="file" class="form-control-file " id="upload-image" name="location_image">
+          </div>
+        </div>
+
+        <input type="hidden" name="adding" value="adding"></input>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <div class="col-sm-4 text-center">
+              <button type="submit" class="golden-button glow-button">Add</button>
+              <p id="processing-message" style="display: none;">Please wait a few seconds to process the image.</p>
+            </div>
+          </div>
+      </form>
+    </div>
+</div>
+  
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('form').submit(function() {
+      $('#processing-message').show();
+    });
+  });
+</script>
+
+{%include 'footer.html'%}  
