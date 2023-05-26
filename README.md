@@ -30,7 +30,7 @@ This web application is specifically designed to assist store managers in effici
 
 
 ## Getting Started:
-"PrimeInventory" requires [Python](https://www.python.org/downloads/) to run.
+"Prime Inventory" requires [Python](https://www.python.org/downloads/) to run.
 
 1. **Clone the repository** to your local machine, open ur cmd & write down:
 ```sh
