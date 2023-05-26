@@ -25,6 +25,10 @@ This web application is specifically designed to assist store managers in effici
 - Flask 2.0.3
 - MySQL Workbench 8.0 CE
 - Bootstrap 5.0.2
+
+
+
+
 <br/><br/>
 ## Data Base:
 -SQL Through MySQL Workbench.
