@@ -27,7 +27,8 @@ This web application is specifically designed to assist store managers in effici
 
 ## Data Base:
 -SQL Through MySQL Workbench.
-
+<br/>
+<br/>
 
 ## Getting Started:
 "Prime Inventory" requires [Python](https://www.python.org/downloads/) to run.
