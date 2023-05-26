@@ -22,7 +22,7 @@ This web application is specifically designed to assist store managers in effici
 - Pyhton 3.6.4
 - Flask 2.0.3
 - MySQL Workbench 8.0 CE
-- Bootstrap 5.0.2 <br/>
+- Bootstrap 5.0.2 
 
 
 ## Data Base:
@@ -58,7 +58,7 @@ python server.py
 ```sh
 localhost:5000
 ```
-
+<br/>
 
 ## Support
 If you encounter any issues or have questions, please [submit an issue](https://github.com/OsamaTbaileh/PrimeInventory/issues) or contact me on one of my contacts [HERE](https://github.com/OsamaTbaileh/OsamaTbaileh)
