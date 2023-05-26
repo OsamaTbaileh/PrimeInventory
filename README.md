@@ -5,7 +5,6 @@
 ## Idea:
 This web application is specifically designed to assist store managers in efficiently managing multiple warehouses located in different cities and locations. Its primary purpose is to provide a streamlined solution for organizing products within these warehouses and effectively tracking the movement of each product. This includes monitoring the origin and destination of each product as it moves throughout the supply chain. By utilizing this application, store managers can optimize their inventory management processes, enhance operational efficiency, and maintain accurate records of product movement within their company's warehousing infrastructure.
 
-<br/><br/>
 
 ## Functional Specifications:
 - **Fully-Responsive:** The usage of bootstrap make it suitable for all screen sizes.
@@ -18,7 +17,6 @@ This web application is specifically designed to assist store managers in effici
     - Can add, delete, and modify various entities (locations, products, etc.).
     - Can observe the movements of all products.
 
-<br/><br/>
 
 ## Programing Languages, Frameworks & Libraries Used:
 - Pyhton 3.6.4
@@ -26,12 +24,10 @@ This web application is specifically designed to assist store managers in effici
 - MySQL Workbench 8.0 CE
 - Bootstrap 5.0.2
 
-<br/><br/>
 
 ## Data Base:
 -SQL Through MySQL Workbench.
  
- <br/><br/>
 
 ## Getting Started:
 "Prime Inventory" requires [Python](https://www.python.org/downloads/) to run.
@@ -62,12 +58,10 @@ python server.py
 localhost:5000
 ```
 
-<br/><br/>
 
 ## Support
 If you encounter any issues or have questions, please [submit an issue](https://github.com/OsamaTbaileh/PrimeInventory/issues) or contact me on one of my contacts [HERE](https://github.com/OsamaTbaileh/OsamaTbaileh)
 
-<br/><br/>
 
 ## Some Screenshots of The Website:
 ## Home Page:
