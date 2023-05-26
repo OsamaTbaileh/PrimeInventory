@@ -18,29 +18,32 @@ This web application is specifically designed to assist store managers in effici
     - Can observe the movements of all products.
 
 
+## Programing Languages, Frameworks & Libraries Used:
+- Pyhton 3.6.4
+- Flask 2.0.3
+- MySQL Workbench 8.0 CE
+- Bootstrap 5.0.2
 
+
+## Data Base:
+-SQL Through MySQL Workbench.
+
+## Some Screenshots of The Website:
 ## Home Page:
 ![Home Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/home_page.jpeg)
+
 
 ## Locations Page:
 ![Locations Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/locations_page.jpeg)
 
 
+## Products & Movements Pages:
 <p float="left">
   <img src="https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/products_page.jpeg" alt="Products Page Screenshot" width="45%" />
   <img src="https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/movements_page.jpeg" alt="Movements Page Screenshot" width="45%" />
 </p>
 
 
-
 ## ERD:
 ![ERD Diagram](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/ERD_diagram.jpg)
 
-
-
-
-## Programing Languages, Frameworks and Libraries used:
-- Pyhton 3.6.4
-- Flask 2.0.3
-- MySQL Workbench 8.0 CE
-- Bootstrap 5.0.2
