@@ -47,3 +47,7 @@ This web application is specifically designed to assist store managers in effici
 ## ERD:
 ![ERD Diagram](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/ERD_diagram.jpg)
 
+
+
+### Note:
+- login and registration will be added very soon, stay tuned.
