@@ -64,7 +64,7 @@ localhost:5000
 
 ## Support
 
-If you encounter any issues or have questions, please [submit an issue](https://github.com/your-username/your-repo/issues) or contact our support team at support@example.com.
+If you encounter any issues or have questions, please [submit an issue](https://github.com/OsamaTbaileh/PrimeInventory/issues) or contact me on one of my contacts [HERE](https://github.com/OsamaTbaileh/OsamaTbaileh)
 
 
 
