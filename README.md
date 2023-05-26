@@ -27,8 +27,8 @@ This web application is specifically designed to assist store managers in effici
 
 
 <p float="left">
-  <img src="https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/products_page.jpeg" alt="Products Page Screenshot" width="50%" />
-  <img src="https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/movements_page.jpeg" alt="Movements Page Screenshot" width="50%" />
+  <img src="https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/products_page.jpeg" alt="Products Page Screenshot" width="45%" />
+  <img src="https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/movements_page.jpeg" alt="Movements Page Screenshot" width="45%" />
 </p>
 
 
