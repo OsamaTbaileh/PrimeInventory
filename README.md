@@ -27,6 +27,7 @@ This web application is specifically designed to assist store managers in effici
 
 ## Data Base:
 -SQL Through MySQL Workbench.
+
 <br/>
 
 ## Getting Started:
