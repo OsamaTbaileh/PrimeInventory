@@ -1,0 +1,65 @@
+{% include 'general/header.html' %} 
+
+<div class="general-body min-vh-100">
+    <div class="container col-lg-7 px-4 py-3 mx-auto form-style rounded form-body">
+      <h2 class="py-3">Add New Product:</h2>
+      <form action="/products/add_new_product" method="post" enctype="multipart/form-data">  
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="product-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product's ID:</label>
+          <div class="col-sm-8 form-input-style min-width-">
+            <input type="text" class="form-control" id="produc-id" placeholder="Type the name here" name="product_id">
+          </div>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label for="product-name" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product's Name:</label>
+            <div class="col-sm-8 form-input-style min-width-">
+              <input type="text" class="form-control" id="product-name" placeholder="Type the name here" name="product_name">
+            </div>
+          </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label for="product-price" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product's Price:</label>
+            <div class="col-sm-8 form-input-style min-width-">
+              <input type="number" class="form-control" id="product-price" placeholder="Type the price here" name="product_price">
+            </div>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label for="product-quantity" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product's Quantity:</label>
+            <div class="col-sm-8 form-input-style min-width-">
+              <input type="number" class="form-control" id="product-quantity" placeholder="Type the quantity here" name="product_quantity">
+            </div>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label for="location-select" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Select Location:</label>
+            <div class="col-sm-8 form-input-style">
+              <select class="form-select" id="location-select" name="location_id">
+                {% for one_location in all_locations %}
+                <option value="{{ one_location.location_id }}" {% if the_location_id == one_location.location_id %} selected {% endif %}>{{ one_location.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+        </div>
+  
+        <!-- <div class="form-group row mb-3 justify-content-center">
+          <label for="upload-image" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Upload Image:</label>
+          <div class="col-sm-8 form-input-style ">
+            <input type="file" class="form-control-file " id="upload-image" name="product_image">
+          </div>
+        </div> -->
+  
+        <div class="form-group row mb-3 justify-content-center">
+            <div class="col-sm-4 text-center">
+              <button type="submit" class="golden-button glow-button">Add</button>
+            </div>
+          </div>
+          
+      </form>
+    </div>
+  </div>
+  
+
+
+{%include 'general/footer.html'%}  

@@ -1,0 +1,160 @@
+{% include 'general/header.html' %} 
+
+<div class="general-body min-vh-100">
+  <div class="container col-lg-7 px-4 py-3 mx-auto form-style rounded form-body">
+    <h2 class="py-3">Edit Movement:</h2>
+    <form action="/movements/add_or_update_movement" method="post" enctype="multipart/form-data">
+      <div class="form-group row mb-3 justify-content-center">
+        <label for="movement-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Movement's ID:</label>
+        <div class="col-sm-8 form-input-style ">
+          <input type="text" class="form-control" id="movement-id" placeholder="Insert ID" name="movement_id" value="{{ movement[0].movement_id }}">
+        </div>
+      </div>
+
+      <div class="form-group row mb-3 justify-content-center">
+        <label for="from-location-select" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">From Location:</label>
+        <div class="col-sm-8 form-input-style">
+          <select class="form-select" id="from-location-select" name="from_location_id">
+            {% for location in locations %}
+              <option value="{{ location.location_id }}" {% if location.location_id == movement[0].from_location_id %}selected{% endif %}>{{ location.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row mb-3 justify-content-center">
+        <label for="to-location-select" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">To Location:</label>
+        <div class="col-sm-8 form-input-style">
+          <select class="form-select" id="to-location-select" name="to_location_id">
+            {% for location in locations %}
+              <option value="{{ location.location_id }}" {% if location.location_id == movement[0].to_location_id %}selected{% endif %}>{{ location.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row mb-3 justify-content-center">
+        <label for="product-name" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product's Name:</label>
+        <div class="col-sm-8 form-input-style min-width-">
+          <select class="form-select" id="product-name" name="product_id_from_select" >
+            <option value="{{ the_product[0].product_id }}" selected>{{ the_product[0].name }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row mb-3 justify-content-center">
+        <label for="product-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product's ID:</label>
+        <div class="col-sm-8 form-input-style min-width-">
+          <input type="text" class="form-control" id="product-id" placeholder="Type the ID here" name="product_id_from_text" value="{{ movement[0].product_id }}">
+        </div>
+      </div>
+
+      <div class="form-group row mb-3 justify-content-center">
+        <label for="movement_quantity" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Quantity:</label>
+        <div class="col-sm-8 form-input-style min-width-">
+          <input type="number" class="form-control" id="movement_quantity" placeholder="Type the movement quantity here" name="movement_quantity" value="{{ movement[0].quantity }}">
+        </div>
+      </div>
+
+      <input type="hidden" name="old_movement_id" value="{{movement[0].movement_id}}">
+
+      <div class="form-group row mb-3 justify-content-center">
+        <div class="col-sm-4 text-center">
+          <button type="submit" class="golden-button glow-button">Update</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+
+
+<script>
+  // Retrieve the select elements
+  const fromLocationSelect1 = document.getElementById('from-location-select');
+  const toLocationSelect = document.getElementById('to-location-select');
+
+  // Store the initial options of both select elements
+  const initialFromOptions = [...fromLocationSelect1.options];
+  const initialToOptions = [...toLocationSelect.options];
+
+  // Add event listener to fromLocationSelect
+  fromLocationSelect1.addEventListener('change', function () {
+    // Clone the initial options
+    const clonedToOptions = [...initialToOptions];
+    // Remove the selected option from the cloned options
+    clonedToOptions.splice(this.selectedIndex, 1);
+    // Set the options of toLocationSelect to the cloned options
+    toLocationSelect.innerHTML = '';
+    clonedToOptions.forEach(function (option) {
+      toLocationSelect.add(option);
+    });
+  });
+
+  // Add event listener to toLocationSelect
+  toLocationSelect.addEventListener('change', function () {
+    // Clone the initial options
+    const clonedFromOptions = [...initialFromOptions];
+    // Remove the selected option from the cloned options
+    clonedFromOptions.splice(this.selectedIndex, 1);
+    // Set the options of fromLocationSelect to the cloned options
+    fromLocationSelect1.innerHTML = '';
+    clonedFromOptions.forEach(function (option) {
+      fromLocationSelect1.add(option);
+    });
+  });
+</script>
+
+<script>
+  // Retrieve the select elements
+  const fromLocationSelect = document.getElementById('from-location-select');
+  const productNameSelect = document.getElementById('product-name');
+
+  // Store the initial options of productNameSelect
+  const initialProductOptions = [...productNameSelect.options];
+
+  // Get the initially selected product ID and from location ID
+  const selectedProductId = productNameSelect.value;
+  const selectedFromLocationId = fromLocationSelect.value;
+
+  // Function to update the product options based on the selected from location
+  function updateProductOptions(locationId) {
+    // Make an AJAX request to retrieve the corresponding products based on the selected From Location
+    fetch(`/products/get_products_by_location/${locationId}`)
+      .then(response => response.json())
+      .then(products => {
+        // Clear the options of productNameSelect
+        productNameSelect.innerHTML = '';
+
+        // Add the initial option to productNameSelect
+        initialProductOptions.forEach(function (option) {
+          productNameSelect.add(option);
+        });
+
+        // Add the retrieved products as options to productNameSelect
+        products.forEach(function (product) {
+          const option = document.createElement('option');
+          option.value = product.product_id;
+          option.text = product.name;
+          productNameSelect.add(option);
+        });
+
+        // Select the initially selected product
+        productNameSelect.value = selectedProductId;
+      });
+  }
+
+  // Add event listener to fromLocationSelect
+  fromLocationSelect.addEventListener('change', function () {
+    const locationId = this.value;
+    updateProductOptions(locationId);
+  });
+
+  // Update the product options based on the initially selected from location
+  updateProductOptions(selectedFromLocationId);
+</script>
+
+
+{%include 'general/footer.html'%}   
