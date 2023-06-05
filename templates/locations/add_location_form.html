@@ -2,8 +2,24 @@
 
 <div class="general-body min-vh-100">
     <div class="container col-lg-7 px-4 py-3 mx-auto form-style rounded form-body">
-      <h2 class="py-3">Add New Location</h2>
+      <h2 class="py-3">Add New Location:</h2>
+
       <form action="/locations/add_new_location" method="post" enctype="multipart/form-data">
+        <!-- Display errors validations for the user. -->
+        <div class="row justify-content-center">
+          <div class="col-sm-11">
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul  style="color: red;">
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+          </div>
+        </div>
+
         <div class="form-group row mb-3 justify-content-center">
           <label for="location-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Location's ID:</label>
           <div class="col-sm-8 form-input-style ">
@@ -30,9 +46,9 @@
         <div class="form-group row mb-3 justify-content-center">
             <div class="col-sm-4 text-center">
               <button type="submit" class="golden-button glow-button">Add</button>
-              <p id="processing-message" style="display: none;">Please wait a few seconds to process the image.</p>
+              <p id="processing-message" style="display: none;">Please wait a few seconds to process the new location.</p>
             </div>
-          </div>
+        </div>
       </form>
     </div>
 </div>

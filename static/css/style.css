@@ -166,7 +166,7 @@ max-width: 100%;
 /* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
 
-.form-group .golden-form-label{
+.golden-form-label{
     background: linear-gradient(to top right, #bb9158, #faf1b0);
     padding: -7px -12px;
     border: 2px solid #bb9158;
@@ -241,4 +241,44 @@ max-width: 100%;
   }
 
 
+.blur {
+    filter: blur(3px);
+}
+
+
+
+/* ///// filter form ///////////////////////////////////////////////////////////////// */
+
+.filter-form-container{
+    position: relative;
+    backdrop-filter: blur(8px); /* Apply a blur effect to the form container */
+    background-color: rgba(0, 0, 0, 0.25); /* Set a translucent background color */
+    border: 2px solid #bb9158;
+}
+
+.filter-button-style{
+    padding: 5px;
+    max-width: 120px;
+}
+
+/* //////////////////////////////////////////////////////////////////////////// */
+
+
+.filter-form-container {
+    font-size: 14px;
+  }
+
   
+  .filter-form-container .col-form-label {
+    margin-bottom: 0; /* Remove bottom margin for the labels */
+  }
+  
+  .filter-form-container input[type="text"],
+  .filter-form-container select {
+    font-size: 14px; /* Adjust the font size if needed */
+  }
+  
+  .filter-form-container .btn-block {
+    width: 100%; /* Make the button fill the width */
+    margin-top: 0.5rem; /* Add margin-top to separate it from the inputs */
+  }

@@ -2,37 +2,54 @@
 
 <div class="general-body min-vh-100">
   <div class="container col-lg-7 px-4 py-3 mb-5 mx-auto form-style rounded form-body">
-    <h2 class="py-3">Edit {{ the_location[0].name }} Location:</h2>
+    <h2 class="py-3">Update {{ the_location[0].name }} Location:</h2>
 
     <form action="/locations/update_location" method="post" enctype="multipart/form-data">
+
       <div class="d-flex justify-content-center mb-3">
-        <img src="data:;base64,{{the_location[0].image_data}}" alt="Image of {{ the_location[0].name }} location." class="img-fluid rounded mx-auto" style="max-width: 40%;">
-      </div>      
-    
-      <div class="form-group row mb-3 justify-content-center">
-        <label for="location-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Location's ID:</label>
-        <div class="col-sm-8 form-input-style ">
-          <input type="text" class="form-control" id="location-id" placeholder="Insert ID" name="location_id" value="{{ the_location[0].location_id }}">
+        <img src="data:;base64,{{the_location[0].image_data}}" alt="Image of {{ the_location[0].name }} location." class="img-fluid rounded mx-auto" style="max-width: 50%;">
+      </div>   
+
+      <!-- Display errors validations for the user. -->
+      <div class="row justify-content-center">
+        <div class="col-sm-11">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul  style="color: red;">
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
         </div>
       </div>
-    
+
       <div class="form-group row mb-3 justify-content-center">
-        <label for="location-name" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Location's name:</label>
+        <label for="location-id" class="col-sm-2 col-form-label text-center golden-form-label rounded mb-1 nowrap-text min-width-div">Location's ID:</label>
         <div class="col-sm-8 form-input-style ">
-          <input type="text" class="form-control" id="location-name" placeholder="Insert ID" name="location_name" value="{{ the_location[0].name }}">
+          <input type="text" class="form-control text-center" id="location-id" placeholder="Insert updated ID" name="location_id" value="{{ the_location[0].location_id }}">
         </div>
       </div>
-    
+
       <div class="form-group row mb-3 justify-content-center">
-        <label for="upload-image" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Upload Image:</label>
+        <label for="location-name" class="col-sm-2 col-form-label text-center golden-form-label rounded mb-1 nowrap-text min-width-div">Location's name:</label>
         <div class="col-sm-8 form-input-style ">
-          <input type="file" class="form-control-file " id="upload-image" name="location_image">
+          <input type="text" class="form-control text-center" id="location-name" placeholder="Insert updated name" name="location_name" value="{{ the_location[0].name }}">
         </div>
       </div>
-    
+
+      <div class="form-group row mb-3 justify-content-center">
+        <label for="upload-image" class="col-sm-2 col-form-label text-center golden-form-label rounded mb-1 nowrap-text min-width-div">Upload Image:</label>
+        <div class="col-sm-8 form-input-style ">
+          <input type="file" class="form-control-file text-center" id="upload-image" name="location_image">
+        </div>
+      </div>
+
       <input type="hidden" name="old_image" value="{{ the_location[0].image_data }}"></input>
       <input type="hidden" name="old_location_id" value="{{the_location[0].location_id}}">
-    
+      <input type="hidden" name="old_location_name" value="{{the_location[0].name}}">
+
       <div class="form-group row mb-3 justify-content-center">
         <div class="col-sm-7 text-center">
           <button type="submit" class="golden-button glow-button">Update</button>

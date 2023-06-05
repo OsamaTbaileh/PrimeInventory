@@ -2,50 +2,48 @@
 
 <div class="general-body min-vh-100">
     <div class="container col-lg-7 px-4 py-3 mx-auto form-style rounded form-body">
-      <h2 class="py-3">Edit product {{ the_product[0].name}}:</h2>
+      <h2 class="py-3">Update {{ the_product[0].name}} product:</h2>
+
       <form action="/products/update_product" method="post" enctype="multipart/form-data">
+      <!-- Display errors validations for the user. -->
+      <div class="row justify-content-center">
+        <div class="col-sm-11">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul  style="color: red;">
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+
         <div class="form-group row mb-3 justify-content-center">
-          <label for="product-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">ID:</label>
+          <label for="product-id" class="col-sm-2 col-form-label text-center golden-form-label rounded mb-1 nowrap-text min-width-div">ID:</label>
           <div class="col-sm-8 form-input-style ">
-            <input type="text" class="form-control" id="product-id" placeholder="Insert ID" name="product_id" value="{{ the_product[0].product_id }}">
+            <input type="text" class="form-control  text-center" id="product-id" placeholder="Insert updated ID" name="product_id" value="{{ the_product[0].product_id }}">
           </div>
         </div>
 
         <div class="form-group row mb-3 justify-content-center">
-            <label for="product-name" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Nama:</label>
+            <label for="product-name" class="col-sm-2 col-form-label text-center golden-form-label rounded mb-1 nowrap-text min-width-div">Name:</label>
             <div class="col-sm-8 form-input-style ">
-              <input type="text" class="form-control" id="product-name" placeholder="Insert ID" name="product_name" value="{{ the_product[0].name }}">
+              <input type="text" class="form-control  text-center" id="product-name" placeholder="Insert updated name" name="product_name" value="{{ the_product[0].name }}">
             </div>
         </div>
 
         <div class="form-group row mb-3 justify-content-center">
-            <label for="product-price" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Price:</label>
+            <label for="product-price" class="col-sm-2 col-form-label text-center golden-form-label rounded mb-1 nowrap-text min-width-div">Price $:</label>
             <div class="col-sm-8 form-input-style ">
-              <input type="text" class="form-control" id="product-price" placeholder="Insert ID" name="product_price" value="{{ the_product[0].price }}">
+              <input type="text" class="form-control text-center" id="product-price" placeholder="Insert updated price" name="product_price" value="{{ the_product[0].price }}">
             </div>
         </div>
 
-        <div class="form-group row mb-3 justify-content-center">
-            <label for="product-quantity" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Quantity:</label>
-            <div class="col-sm-8 form-input-style ">
-              <input type="text" class="form-control" id="product-quantity" placeholder="Insert ID" name="product_quantity" value="{{ the_product[0].product_quantity }}">
-            </div>
-        </div>
-
-        <div class="form-group row mb-3 justify-content-center">
-          <label for="to-location-select" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Location:</label>
-          <div class="col-sm-8 form-input-style">
-            <select class="form-select" id="to-location-select" name="product_location_id">
-              {% for one_location in all_locations %}
-                <option value="{{ one_location.location_id }}" {% if the_location[0].location_id == one_location.location_id %}selected{% endif %}>{{ one_location.name }}</option>
-              {% endfor %}
-            </select>
-          </div>
-        </div>
-  
         <input type="hidden" name="old_product_id" value="{{the_product[0].product_id}}">
-        <input type="hidden" name="old_location_id" value="{{the_location[0].location_id}}">
-  
+        <input type="hidden" name="old_product_name" value="{{the_product[0].name}}">
+
         <div class="form-group row mb-3 justify-content-center">
           <div class="col-sm-4 text-center">
             <button type="submit" class="golden-button glow-button">Update</button>

@@ -1,21 +1,38 @@
 {% include 'general/header.html' %} 
 
 <div class="general-body min-vh-100">
-    <div class="container col-lg-7 px-4 py-3 mx-auto form-style rounded form-body">
+    <div class="container col-lg-7 px-4 py-3 mx-auto mb-5 form-style rounded form-body">
       <h2 class="py-3">Add New Movement:</h2>
-      <form action="/movements/add_or_update_movement" method="post" enctype="multipart/form-data">
+
+      <form action="/movements/add_new_movement" method="post" enctype="multipart/form-data">
+        <!-- Display errors validations for the user. -->
+        <div class="row justify-content-center">
+          <div class="col-sm-11">
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul  style="color: red;">
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+          </div>
+        </div>
+
         <div class="form-group row mb-3 justify-content-center">
           <label for="movement-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Movement's ID:</label>
           <div class="col-sm-8 form-input-style ">
-            <input type="text" class="form-control" id="movement-id" placeholder="Insert ID" name="movement_id">
+            <input type="text" class="form-control text-center" id="movement-id" placeholder="Insert ID" name="movement_id">
           </div>
         </div>
 
         <div class="form-group row mb-3 justify-content-center">
           <label for="from-location-select" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">From Location:</label>
           <div class="col-sm-8 form-input-style">
-            <select class="form-select" id="from-location-select" name="from_location_id">
-              <option value="" disabled selected>Select a location</option>
+            <select class="form-select text-center" id="from-location-select" name="from_location_id">
+              <option value="" disabled selected>Select From Location</option>
+              <option value="NULL">None</option>
               {% for location in locations %}
               <option value="{{ location.location_id }}">{{ location.name }}</option>
               {% endfor %}
@@ -26,32 +43,38 @@
         <div class="form-group row mb-3 justify-content-center">
           <label for="to-location-select" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">To Location:</label>
           <div class="col-sm-8 form-input-style">
-            <select class="form-select" id="to-location-select" name="to_location_id" disabled>
-              <option value="" disabled selected>Please select From Location first</option>
+            <select class="form-select text-center" id="to-location-select" name="to_location_id" disabled>
+              <option value="" disabled selected>Please select a "From Location" first</option>
+              <option value="NULL">None</option>
             </select>
           </div>
         </div>
+        
+
+        <div id="existing-product-section">
+          <div class="form-group row mb-3 justify-content-center">
+            <label for="product-id-select" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Select Product:</label>
+            <div class="col-sm-8 form-input-style">
+              <select class="form-select text-center" id="product-id-select" name="product_id_select" onchange="handleProductSelect()">
+                <option value="" >Select a "From Location" first to view all it's products.</option>
+                {% for one_product in all_products %}
+                <option value="{{ one_product.product_id }}">{{ one_product.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
   
-        <div class="form-group row mb-3 justify-content-center">
-          <label for="product-name" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product's Name:</label>
-          <div class="col-sm-8 form-input-style min-width-">
-            <select class="form-select" id="product-name" name="product_id_from_select" disabled>
-              <option value="" disabled selected>Select a product</option>
-            </select>
+          <div class="form-group row mb-3 justify-content-center">
+            <label for="product-id-input" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">or Use Product ID:</label>
+            <div class="col-sm-8 form-input-style">
+              <input type="text" class="form-control text-center" id="product-id-input" name="product_id_input" placeholder="Enter specefic product id directly">
+            </div>
           </div>
-        </div>
 
         <div class="form-group row mb-3 justify-content-center">
-          <label for="product-name" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product's ID:</label>
-          <div class="col-sm-8 form-input-style min-width-">
-            <input type="text" class="form-control" id="product-id" placeholder="Type the ID here" name="product_id_from_text" disabled>
-          </div>
-        </div>
-
-        <div class="form-group row mb-3 justify-content-center">
-            <label for="movement_quantity" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Quantity:</label>
+            <label for="movement-quantity" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Quantity:</label>
             <div class="col-sm-8 form-input-style min-width-">
-              <input type="number" class="form-control" id="movement_quantity" placeholder="Type the movement quantity here" name="movement_quantity">
+              <input type="number" step="1" class="form-control text-center" id="movement-quantity" placeholder="Type the movement quantity here" name="movement_quantity">
             </div>
         </div>
 
@@ -66,64 +89,135 @@
   </div>
 
 
-
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var fromLocationSelect = document.getElementById('from-location-select');
-      var toLocationSelect = document.getElementById('to-location-select');
-      var productid = document.getElementById('product-id');
-      var locations = JSON.parse('{{ locations | tojson | safe }}');
-  
-      fromLocationSelect.addEventListener('change', function() {
-        var selectedLocationId = this.value;
-  
-        // Clear the options in the second select input
-        toLocationSelect.innerHTML = '';
-  
-        // Enable or disable the second select input based on the selected value
-        toLocationSelect.disabled = (selectedLocationId === '');
-        productid.disabled = (selectedLocationId === '');
-  
-        // Add options to the second select input
-        for (var i = 0; i < locations.length; i++) {
-          if (locations[i].location_id !== selectedLocationId) {
-            var option = document.createElement('option');
-            option.value = locations[i].location_id;
-            option.textContent = locations[i].name;
-            toLocationSelect.appendChild(option);
-          }
-        }
-      });
-    });
-  </script>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- This script make one of the "product_id_input" & "product_id_select" blur and disabled when the user choose to use the other. -->
 <script>
-  $(document).ready(function() {
-    // When the "From Location" select input value changes
-    $("#from-location-select").change(function() {
-      var selectedLocationId = $(this).val();
-      
-      // Clear the "Product's Name" select options
-      $("#product-name").empty().append('<option value="" disabled selected>Select a product</option>');
-      
-      // Make AJAX request to get products based on location
-      $.ajax({
-        url: "/products/get_products_by_location/" + selectedLocationId,
-        type: "GET",
-        success: function(response) {
-          // Populate the "Product's Name" select options
-          for (var i = 0; i < response.length; i++) {
-            $("#product-name").append('<option value="' + response[i].product_id + '">' + response[i].name + '</option>');
-          }
-          
-          // Enable the "Product's Name" select input
-          $("#product-name").prop("disabled", false);
-        }
-      });
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get references to the product select and text input elements.
+    var productSelect = document.getElementById('product-id-select');
+    var productTextInput = document.getElementById('product-id-input');
+
+    // Event handler for the product select
+    productSelect.addEventListener('change', function() {
+      if (productSelect.value !== '') {
+        // If a product is selected.
+        productTextInput.disabled = true; // Disable the text input.
+        productTextInput.classList.add('blur'); // Apply a blur effect to the text input.
+      } else {
+        // If no product is selected.
+        productTextInput.disabled = false; // Enable the text input.
+        productTextInput.classList.remove('blur'); // Remove the blur effect from the text input.
+      }
+    });
+
+    // Event handler for the product text input
+    productTextInput.addEventListener('input', function() {
+      if (productTextInput.value !== '') {
+        // If text is entered in the input.
+        productSelect.disabled = true; // Disable the product select.
+        productSelect.classList.add('blur'); // Apply a blur effect to the product select.
+      } else {
+        // If no text is entered in the input.
+        productSelect.disabled = false; // Enable the product select.
+        productSelect.classList.remove('blur'); // Remove the blur effect from the product select.
+      }
     });
   });
 </script>
+
+
+<!-- This script is to prevent the user from choosing a "To Location" before choosing a "From Location".
+It also make the choosen "From Location" not appaer as an option in the "To Location" select menu. -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var fromLocationSelect = document.getElementById('from-location-select');
+  var toLocationSelect = document.getElementById('to-location-select');
+  var locations = JSON.parse('{{ locations | tojson | safe }}');
+
+  fromLocationSelect.addEventListener('change', function() {
+    var selectedLocationId = this.value;
+
+    // Clear the options in the second select input.
+    toLocationSelect.innerHTML = '';
+
+    // Enable or disable the second select input based on the selected value.
+    toLocationSelect.disabled = (selectedLocationId === '');
+
+    // Add options to the second select input.
+    for (var i = 0; i < locations.length; i++) {
+      if (locations[i].location_id !== selectedLocationId) {
+        var option = document.createElement('option');
+        option.value = locations[i].location_id;
+        option.textContent = locations[i].name;
+        toLocationSelect.appendChild(option);
+      }
+    }
+
+    // Remove the "None" option from the "To Location" select input if it is selected in the "From Location" select input.
+    if (selectedLocationId === 'NULL') {
+      var noneOption = document.querySelector('#to-location-select option[value="NULL"]');
+      if (noneOption) {
+        noneOption.remove();
+      }
+    } else {
+      // Add back the "None" option to the "To Location" select input if it doesn't exist.
+      var noneOption = document.querySelector('#to-location-select option[value="NULL"]');
+      if (!noneOption) {
+        var noneOption = document.createElement('option');
+        noneOption.value = 'NULL';
+        noneOption.textContent = 'None';
+        toLocationSelect.appendChild(noneOption);
+      }
+    }
+  });
+});
+
+</script>
+
+
+<!-- This product fetch the products that are availale at the choosen "From Location" and list them in the "Select Product" select menu. -->
+<script>
+  $(document).ready(function() {
+    // When the "From Location" select input value changes.
+    $("#from-location-select").change(function() {
+      var selectedLocationId = $(this).val();
+      
+      // Clear the "Select Product" options.
+      $("#product-id-select").empty();
+      
+      // Add the extra standard option.
+      $("#product-id-select").append('<option value="">Please Select Product</option>');
+      
+      // Check if the "None" option is selected.
+      if (selectedLocationId === "NULL") {
+        // Make AJAX request to get all products.
+        $.ajax({
+          url: "/products/get_all_products",
+          type: "GET",
+          success: function(response) {
+            // Populate the "Product's Name" select options.
+            for (var i = 0; i < response.length; i++) {
+              $("#product-id-select").append('<option value="' + response[i].product_id + '">' + response[i].name + '</option>');
+            }
+          }
+        });
+      } else {
+        // Make AJAX request to get products based on location.
+        $.ajax({
+          url: "/products/get_products_by_location/" + selectedLocationId,
+          type: "GET",
+          success: function(response) {
+            // Populate the "Product's Name" select options.
+            for (var i = 0; i < response.length; i++) {
+              $("#product-id-select").append('<option value="' + response[i].product_id + '">' + response[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;" + "qty: " + response[i].total_quantity + '</option>');
+            }
+          }
+        });
+      }
+    });
+  });
+</script>
+
 
 {%include 'general/footer.html'%}   

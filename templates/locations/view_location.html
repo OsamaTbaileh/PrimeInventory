@@ -1,7 +1,7 @@
 {% include 'general/header.html' %} 
 
 <div class="general-body min-vh-100">
-    <div class="container col-lg-10 px-4 py-3 mx-auto form-style rounded form-body">
+    <div class="container col-lg-10 px-4 py-3 mx-auto mb-5 form-style rounded form-body">
         <h2 class="py-3">Details of {{the_location[0].name}} location:</h2>
 
         <div class="d-flex justify-content-center mb-3">
@@ -45,16 +45,16 @@
                         <td>{{ one_product.product_id }}</td>
                         <td>{{ one_product.name }}</td>
                         <td>{{ one_product.price }}</td>
-                        <td>{{ one_product.total_out_quantity }}</td>
                         <td>{{ one_product.total_in_quantity }}</td>
+                        <td>{{ one_product.total_out_quantity }}</td>
                         <td>{{ one_product.total_quantity }}</td>
                         <td>
                             <form action="/products/delete_product/{{one_product.product_id}}" method="POST">
                                 <input type="hidden" name="product_id" value="{{ one_product.product_id }}">
                                 <div class="btn-group">
-                                    <a href="/products/view_product/{{ one_product.product_id }}/{{the_location[0].location_id}}" class="btn btn-success">View</a>
-                                    <a href="/products/edit_product/{{ one_product.product_id }}/{{the_location[0].location_id}}" class="btn btn-primary">Edit</a>
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <a href="/products/view_product/{{ one_product.product_id }}" class="btn btn-success">View</a>
+                                    <a href="/products/update_product/{{ one_product.product_id }}" class="btn btn-primary">Edit</a>
+                                    <button type="submit" class="btn btn-danger" onclick="confirmDelete(event)">Delete</button>
                                 </div>
                             </form>
                         </td>
@@ -67,5 +67,18 @@
 </div>
 
 
+<!-- Showing a pop up when clicking the delete button to approve the deletion. -->
+<script>
+    function confirmDelete(event) {
+      event.preventDefault(); // Prevent the default form submission
+      if (confirm("Are you sure you want to delete this product?")) {
+        // If the user clicks "OK" (Yes) in the confirmation pop-up, proceed with the form submission
+        event.target.closest('form').submit();
+      } else {
+        // If the user clicks "Cancel" (No) in the confirmation pop-up, do nothing
+        return false;
+      }
+    }
+  </script>
 
 {%include 'general/footer.html'%}  

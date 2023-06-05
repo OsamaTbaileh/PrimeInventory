@@ -1,65 +1,285 @@
 {% include 'general/header.html' %} 
 
 <div class="general-body min-vh-100">
-    <div class="container col-lg-7 px-4 py-3 mx-auto form-style rounded form-body">
-      <h2 class="py-3">Add New Product:</h2>
-      <form action="/products/add_new_product" method="post" enctype="multipart/form-data">  
-        <div class="form-group row mb-3 justify-content-center">
-          <label for="product-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product's ID:</label>
-          <div class="col-sm-8 form-input-style min-width-">
-            <input type="text" class="form-control" id="produc-id" placeholder="Type the name here" name="product_id">
+  <div class="container col-lg-7 px-4 py-3 mx-auto mb-5 form-style rounded form-body">
+    <h2 class="py-3">Add New Product:</h2>
+
+    <form action="/products/add_new_product" method="post">
+      <!-- First section of the form: -->
+      <div class="form-group row mb-3 justify-content-center align-items-center">
+        <label for="existing-product-checkbox" class="col-sm-9 col-form-label mb-1 text-wrap min-width-div">Do you want to add more quantity of an existing product to a specific location?</label>
+        <div class="col-sm-1 form-input-style d-flex align-items-center">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="existing-product-checkbox" checked>
+            <label class="form-check-label" for="existing-product-checkbox">Yes</label>
           </div>
         </div>
+      </div>
 
-        <div class="form-group row mb-3 justify-content-center">
-            <label for="product-name" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product's Name:</label>
-            <div class="col-sm-8 form-input-style min-width-">
-              <input type="text" class="form-control" id="product-name" placeholder="Type the name here" name="product_name">
-            </div>
-          </div>
-
-        <div class="form-group row mb-3 justify-content-center">
-            <label for="product-price" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product's Price:</label>
-            <div class="col-sm-8 form-input-style min-width-">
-              <input type="number" class="form-control" id="product-price" placeholder="Type the price here" name="product_price">
-            </div>
-        </div>
-
-        <div class="form-group row mb-3 justify-content-center">
-            <label for="product-quantity" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product's Quantity:</label>
-            <div class="col-sm-8 form-input-style min-width-">
-              <input type="number" class="form-control" id="product-quantity" placeholder="Type the quantity here" name="product_quantity">
-            </div>
-        </div>
-
-        <div class="form-group row mb-3 justify-content-center">
-            <label for="location-select" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Select Location:</label>
-            <div class="col-sm-8 form-input-style">
-              <select class="form-select" id="location-select" name="location_id">
-                {% for one_location in all_locations %}
-                <option value="{{ one_location.location_id }}" {% if the_location_id == one_location.location_id %} selected {% endif %}>{{ one_location.name }}</option>
+      <!-- Display errors validations for the user. -->
+      <div class="row justify-content-center">
+        <div class="col-sm-11">
+        {% if session['first_sec_validation'] %}
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul  style="color: red;">
+                {% for message in messages %}
+                  <li>{{ message }}</li>
                 {% endfor %}
-              </select>
-            </div>
+              </ul>
+            {% endif %}
+          {% endwith %}
+        {% endif %}
         </div>
-  
-        <!-- <div class="form-group row mb-3 justify-content-center">
-          <label for="upload-image" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Upload Image:</label>
-          <div class="col-sm-8 form-input-style ">
-            <input type="file" class="form-control-file " id="upload-image" name="product_image">
-          </div>
-        </div> -->
-  
+      </div>
+
+      <div id="existing-product-section">
         <div class="form-group row mb-3 justify-content-center">
-            <div class="col-sm-4 text-center">
-              <button type="submit" class="golden-button glow-button">Add</button>
-            </div>
+          <label for="product-id-select-1" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Select Product:</label>
+          <div class="col-sm-8 form-input-style">
+            <select class="form-select text-center" id="product-id-select-1" name="product_id_select_1" onchange="handleProductSelect()">
+              <option value="" >Select Product</option>
+              {% for one_product in all_products %}
+              <option value="{{ one_product.product_id }}">{{ one_product.name }}</option>
+              {% endfor %}
+            </select>
           </div>
-          
-      </form>
-    </div>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="product-id-input-1" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">or Use Product ID:</label>
+          <div class="col-sm-8 form-input-style">
+            <input type="text" class="form-control text-center" id="product-id-input-1" name="product_id_input_1" placeholder="Enter specefic product id directly">
+          </div>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="product-quantity-1" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Quantity:</label>
+          <div class="col-sm-8 form-input-style">
+            <input type="number" class="form-control text-center" id="product-quantity-1" name="product_quantity_1" placeholder="Enter the quantity you want to add">
+          </div>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="movement-id-1" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Movement ID:</label>
+          <div class="col-sm-8 form-input-style">
+            <input type="text" class="form-control text-center" id="movement-id-1" name="movement_id_1" placeholder="Enter specefic movement id">
+          </div>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="product-location-id-1" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Select Location:</label>
+          <div class="col-sm-8 form-input-style">
+            <select class="form-select text-center" id="product-location-id-1" name="product_location_id_1" onchange="handleLocationSelect()">
+              <option value="" DIS>Select Location</option>
+              {% for one_location in all_locations %}
+              <option value="{{ one_location.location_id }}" {% if the_location and one_location.location_id == the_location[0].location_id %} selected {% else %} {% endif %}>{{ one_location.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- Second section of the form: -->
+      <div class="form-group row mb-3 justify-content-center align-items-center">
+        <label for="new-product-checkbox" class="col-sm-9 col-form-label mb-1 text-wrap min-width-div">Do you want to add a brand new product to a specific location?</label>
+        <div class="col-sm-1 form-input-style d-flex align-items-center">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="new-product-checkbox" name="new_product_checkbox" >
+            <label class="form-check-label" for="new-product-checkbox">Yes</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Display errors validations for the user. -->
+      <div class="row justify-content-center">
+        <div class="col-sm-11">
+        {% if not session['first_sec_validation'] %}
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul  style="color: red;">
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+        {% endif %}
+        </div>
+      </div>
+
+      <div id="new-product-section" class="blur">
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="product-id-2" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product ID:</label>
+          <div class="col-sm-8 form-input-style">
+            <input type="text" class="form-control text-center" id="product-id-2" name="product_id_2" placeholder="Enter specefic ID for the new product" disabled>
+          </div>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="product-name-2" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product Name:</label>
+          <div class="col-sm-8 form-input-style">
+            <input type="text" class="form-control text-center" id="product-name-2" name="product_name_2" placeholder="Enter name for the new product" disabled>
+          </div>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="product-price-2" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Product Price $:</label>
+          <div class="col-sm-8 form-input-style">
+            <input type="number" class="form-control text-center" id="product-price-2" name="product_price_2" placeholder="Enter price for the new product" disabled>
+          </div>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="product-quantity-2" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Quantity:</label>
+          <div class="col-sm-8 form-input-style">
+            <input type="number" class="form-control text-center" id="product-quantity-2" name="product_quantity_2" placeholder="Enter the quantity you want to add" disabled>
+          </div>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="movement-id-2" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Movement ID:</label>
+          <div class="col-sm-8 form-input-style">
+            <input type="text" class="form-control text-center" id="movement-id-2" name="movement_id_2" placeholder="Enter specefic movement ">
+          </div>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+          <label for="product-location-id-2" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Select Location:</label>
+          <div class="col-sm-8 form-input-style">
+            <select class="form-select text-center" id="product-location-id-2" name="product_location_id_2" disabled>
+              <option value="">Select Location</option>
+              {% for one_location in all_locations %}
+              <option value="{{ one_location.location_id }}" {% if the_location and one_location.location_id == the_location[0].location_id %} selected {% else %} {% endif %}>{{ one_location.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row mb-3 justify-content-center">
+        <div class="col-sm-4 text-center">
+          <button type="submit" class="golden-button glow-button">Add</button>
+        </div>
+      </div>
+    </form>
   </div>
+</div>
   
 
 
-{%include 'general/footer.html'%}  
+
+<!-- This script make one of the "product_id_input" & "product_id_select" blur and disabled when the user choose to use the other. -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get references to the product select and text input elements
+    var productSelect = document.getElementById('product-id-select-1');
+    var productTextInput = document.getElementById('product-id-input-1');
+
+    // Event handler for the product select
+    productSelect.addEventListener('change', function() {
+      if (productSelect.value !== '') {
+        // If a product is selected
+        productTextInput.disabled = true; // Disable the text input
+        productTextInput.classList.add('blur'); // Apply a blur effect to the text input
+      } else {
+        // If no product is selected
+        productTextInput.disabled = false; // Enable the text input
+        productTextInput.classList.remove('blur'); // Remove the blur effect from the text input
+      }
+    });
+
+    // Event handler for the product text input
+    productTextInput.addEventListener('input', function() {
+      if (productTextInput.value !== '') {
+        // If text is entered in the input
+        productSelect.disabled = true; // Disable the product select
+        productSelect.classList.add('blur'); // Apply a blur effect to the product select
+      } else {
+        // If no text is entered in the input
+        productSelect.disabled = false; // Enable the product select
+        productSelect.classList.remove('blur'); // Remove the blur effect from the product select
+      }
+    });
+  });
+</script>
+
+
+<!-- This script make one section of the two sections of the form blur and disabled when the user check the box above the other section. -->
+<script>
+  // Get references to the checkboxes and form sections
+  const existingProductCheckbox = document.getElementById("existing-product-checkbox");
+  const newProductCheckbox = document.getElementById("new-product-checkbox");
+  const existingProductSection = document.getElementById("existing-product-section");
+  const newProductSection = document.getElementById("new-product-section");
+
+  // Event handler for the existing product checkbox
+  existingProductCheckbox.addEventListener("change", function() {
+    if (existingProductCheckbox.checked) {
+      // If the existing product checkbox is checked
+      existingProductSection.classList.remove("blur"); // Show the existing product section
+      enableInputs(existingProductSection); // Enable inputs in the existing product section
+      newProductSection.classList.add("blur"); // Hide the new product section
+      disableInputs(newProductSection); // Disable inputs in the new product section
+
+      if (newProductCheckbox.checked) {
+        // If the new product checkbox is also checked, uncheck it
+        newProductCheckbox.checked = false;
+      }
+    } else {
+      // If the existing product checkbox is unchecked
+      // Prevent unchecking both checkboxes
+      existingProductCheckbox.checked = true;
+    }
+  });
+
+  // Event handler for the new product checkbox
+  newProductCheckbox.addEventListener("change", function() {
+    if (newProductCheckbox.checked) {
+      // If the new product checkbox is checked
+      newProductSection.classList.remove("blur"); // Show the new product section
+      enableInputs(newProductSection); // Enable inputs in the new product section
+      existingProductSection.classList.add("blur"); // Hide the existing product section
+      disableInputs(existingProductSection); // Disable inputs in the existing product section
+
+      if (existingProductCheckbox.checked) {
+        // If the existing product checkbox is also checked, uncheck it
+        existingProductCheckbox.checked = false;
+      }
+    } else {
+      // If the new product checkbox is unchecked
+      // Prevent unchecking both checkboxes
+      newProductCheckbox.checked = true;
+    }
+  });
+
+  // Function to enable inputs in a given section
+  function enableInputs(section) {
+    const inputs = section.getElementsByTagName("input");
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].disabled = false;
+    }
+
+    const selects = section.getElementsByTagName("select");
+    for (let i = 0; i < selects.length; i++) {
+      selects[i].disabled = false;
+    }
+  }
+
+  // Function to disable inputs in a given section
+  function disableInputs(section) {
+    const inputs = section.getElementsByTagName("input");
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].disabled = true;
+    }
+
+    const selects = section.getElementsByTagName("select");
+    for (let i = 0; i < selects.length; i++) {
+      selects[i].disabled = true;
+    }
+  }
+</script>
+
+{%include 'general/footer.html'%}   

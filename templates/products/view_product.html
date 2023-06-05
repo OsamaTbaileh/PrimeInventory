@@ -1,46 +1,72 @@
 {% include 'general/header.html' %} 
 
 <div class="general-body min-vh-100">
-    <div class="container col-lg-7 px-4 py-3 mx-auto form-style rounded form-body">
-      <h2 class="py-3">Details of Product ({{the_product[0].product_name}}):</h2>
+    <div class="container col-lg-10 px-4 py-3 mx-auto mb-5 form-style rounded form-body">
+        <h2 class="py-3">Details of {{the_product[0].name}} product:</h2>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Product's ID:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{the_product[0].product_id}}
+            </p>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Product's Name:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{the_product[0].name}}
+            </p>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+          <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Product's Price:</label>
+          <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+              {{the_product[0].price}}
+          </p>
+      </div>
 
       <div class="form-group row mb-3 justify-content-center">
-        <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">ID:</label>
+        <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Created At:</label>
         <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
-          {{the_product[0].product_id}}
+            {{the_product[0].created_at}}
         </p>
       </div>
 
       <div class="form-group row mb-3 justify-content-center">
-        <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Name:</label>
+        <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Updated At:</label>
         <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
-          {{the_product[0].product_name}}
+            {{the_product[0].updated_at}}
         </p>
       </div>
 
-      <div class="form-group row mb-3 justify-content-center">
-        <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Price:</label>
-        <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
-          {{the_product[0].price}}
-        </p>
-      </div>
+        <div class="table-responsive">
+            <div class="mb-3 text-center">
+                <a href="/products/add_new_product" class="btn btn-warning btn-lg">Add New Product</a>
+            </div>
 
-      <div class="form-group row mb-3 justify-content-center">
-        <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Quantity:</label>
-        <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
-          {{the_product[0].product_quantity}}
-        </p>
-      </div>
-
-
-      <div class="form-group row mb-3 justify-content-center">
-        <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Location:</label>
-        <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
-          {{the_product[0].location_name}}
-        </p>
-      </div>
-
+            <p>This product is distributed in the following locations:</p>
+            <table class="table custom-table table-hover" id="table">
+                <thead>
+                    <tr class="table-head">
+                        <th>Location's ID</th>
+                        <th>Location's Name</th>
+                        <th>Total Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for one_location in all_locations %}
+                    <tr>
+                        <td>{{ one_location.location_id }}</td>
+                        <td>{{ one_location.location_name }}</td>
+                        <td>{{ one_location.total_quantity }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+
 
 {%include 'general/footer.html'%}  

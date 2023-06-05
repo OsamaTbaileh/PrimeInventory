@@ -1,8 +1,8 @@
 {% include 'general/header.html' %} 
 
 <div class="general-body min-vh-100">
-    <div class="container col-lg-7 px-4 py-3 mx-auto form-style rounded form-body">
-      <h2 class="py-3">Details of Movement with ID ({{the_movement[0].movement_id}}):</h2>
+    <div class="container col-lg-7 px-4 py-3 mx-auto mb-5 form-style rounded form-body">
+      <h2 class="py-3">Details of ({{the_movement[0].movement_id}}) movement:</h2>
 
       <div class="form-group row mb-3 justify-content-center">
         <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Movement's ID:</label>
@@ -44,6 +44,20 @@
         <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Quantity:</label>
         <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
             {{the_movement[0].quantity}}
+        </p>
+      </div>
+
+      <div class="form-group row mb-3 justify-content-center">
+        <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Created At:</label>
+        <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+            {{the_movement[0].created_at}}
+        </p>
+      </div>
+
+      <div class="form-group row mb-3 justify-content-center">
+        <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Updated At:</label>
+        <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+            {{the_movement[0].updated_at}}
         </p>
       </div>
     </div>
