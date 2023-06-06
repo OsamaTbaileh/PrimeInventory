@@ -1,7 +1,7 @@
 {% include 'general/header.html' %} 
 
 <div class="general-body min-vh-100">
-    <div class="container col-lg-7 px-4 py-3 mx-auto form-style rounded form-body">
+    <div class="container col-lg-7 px-4 py-3 mx-auto mb-5 form-style rounded form-body">
       <h2 class="py-3">Add New Location:</h2>
 
       <form action="/locations/add_new_location" method="post" enctype="multipart/form-data">
@@ -23,20 +23,20 @@
         <div class="form-group row mb-3 justify-content-center">
           <label for="location-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Location's ID:</label>
           <div class="col-sm-8 form-input-style ">
-            <input type="text" class="form-control" id="location-id" placeholder="Insert ID" name="location_id">
+            <input type="text" class="form-control text-center" id="location-id" placeholder="Insert ID" name="location_id">
           </div>
         </div>
 
         <div class="form-group row mb-3 justify-content-center">
           <label for="location-name" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Location's Name:</label>
           <div class="col-sm-8 form-input-style min-width-">
-            <input type="text" class="form-control" id="location-name" placeholder="Type the name here" name="location_name">
+            <input type="text" class="form-control text-center" id="location-name" placeholder="Type the name here" name="location_name">
           </div>
         </div>
 
         <div class="form-group row mb-3 justify-content-center">
           <label for="upload-image" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Upload Image:</label>
-          <div class="col-sm-8 form-input-style ">
+          <div class="col-sm-8 form-input-style text-center">
             <input type="file" class="form-control-file " id="upload-image" name="location_image">
           </div>
         </div>
