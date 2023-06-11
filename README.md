@@ -75,11 +75,18 @@ If you encounter any issues or have questions, please [submit an issue](https://
 
 <br/><br/>
 
-## Products & Movements Pages:
-<p float="left">
-  <img src="https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/products_page.jpeg" alt="Products Page Screenshot" width="45%" />
-  <img src="https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/movements_page.jpeg" alt="Movements Page Screenshot" width="45%" />
-</p>
+## Products Page:
+![Products Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/products_page.jpeg)
+
+<br/><br/>
+
+## Movements Page:
+![Movements Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/movements_page.jpeg)
+
+<br/><br/>
+
+## Report Page:
+![Report Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/report_page.jpeg)
 
 <br/><br/>
 
