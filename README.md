@@ -85,8 +85,13 @@ If you encounter any issues or have questions, please [submit an issue](https://
 
 <br/><br/>
 
-## Report Page:
-![Report Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/report_page.jpeg)
+## Normal Report Page:
+![Report Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/normal_report_page.jpeg)
+
+<br/><br/>
+
+## Advanced Report Page:
+![Report Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/advanced_report_page.jpeg)
 
 <br/><br/>
 
