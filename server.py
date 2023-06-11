@@ -14,8 +14,8 @@ def render_home_page():
     return render_template("general/home_page.html")
 
 
-# Render the report page.
-@app.route("/report")
+# Render the normal_report_page.
+@app.route("/normal_report")
 def render_report_page():
     mysql = connectToMySQL('prime_inventory')
     products = mysql.query_db("""
@@ -29,7 +29,44 @@ def render_report_page():
         GROUP BY l.location_id, p.product_id
         HAVING total_in_quantity > 0;
     """)
-    return render_template("general/report_page.html", all_products=products)
+    return render_template("general/normal_report_page.html", all_products=products)
+
+
+# Render the advanced_report_page.
+@app.route("/advanced_report")
+def display_table():
+    mysql = connectToMySQL('prime_inventory')
+    query = "SELECT DISTINCT product_id, name FROM products"
+    products = mysql.query_db(query)
+
+    mysql = connectToMySQL('prime_inventory')
+    query = "SELECT DISTINCT location_id, name FROM locations"
+    locations = mysql.query_db(query)
+
+    mysql = connectToMySQL('prime_inventory')
+    # Fetch product quantities in each location
+    query = """
+        SELECT l.location_id, l.name AS location_name, p.product_id, p.name AS product_name,
+            COALESCE(SUM(CASE WHEN m.to_location_id = l.location_id THEN m.quantity END), 0) -
+            COALESCE(SUM(CASE WHEN m.from_location_id = l.location_id THEN m.quantity END), 0) AS total_quantity
+        FROM locations l
+        CROSS JOIN products p
+        LEFT JOIN movements m ON l.location_id = m.to_location_id AND p.product_id = m.product_id
+        GROUP BY l.location_id, p.product_id
+    """
+    table_data = mysql.query_db(query)
+
+    quantity_dict = {}
+    for row in table_data:
+        location_id = row['location_id']
+        product_id = row['product_id']
+        quantity = row['total_quantity']
+        if location_id not in quantity_dict:
+            quantity_dict[location_id] = {}
+        quantity_dict[location_id][product_id] = quantity
+
+    return render_template('general/advanced_report_page.html', products=products, locations=locations, quantity_dict=quantity_dict)
+
 
 
 

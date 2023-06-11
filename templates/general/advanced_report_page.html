@@ -1,0 +1,34 @@
+{% include 'general/header.html' %} 
+    
+<div class="general-body min-vh-100">
+    <div class="container mt-5 mb-5 pt-5">
+        <div>
+            <h1 class="text-warning">Advanced Report:</h1>
+            <p class="text-light">This page contains a full report of all products with their corresponding quantity in each location.</p>
+        </div>
+        <div class="table-responsive">
+            <table class="table custom-table table-hover report_table" id="table">
+                <thead>
+                    <tr class="table-head">
+                        <th class="fixed-column"></th>
+                        {% for product in products %}
+                            <th>{{ product['name'] }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for location in locations %}
+                        <tr>
+                            <td class="bg-warning fixed-column">{{ location['name'] }}</td>
+                            {% for product in products %}
+                                <td>{{ quantity_dict.get(location['location_id']).get(product['product_id']) }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{%include 'general/footer.html'%}  
