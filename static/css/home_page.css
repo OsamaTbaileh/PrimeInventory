@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins" , sans-serif;
+}
+
+
+
+/* Slogan Section:///////////////////////////////////////////////////////////////////////////////////*/
+.gradient-bg {
+    /* background: linear-gradient(to top right, #1c1b1b, #6a6a6a); */
+    background-image: url("/static/img/sloganBackGround.jpg");
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset -10px 310px 100px -150px #b18953;
+}
+
+.centered-img {
+    max-width: 100%;
+    height: auto;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    border-radius: 40px;
+}
+
+
+
+/* Our Vision & Mission Section:///////////////////////////////////////////////////////////////////////////////////*/
+.our-vision-section {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+    opacity: 0; /* Set the opacity to 0 */
+    visibility: hidden; /* Hide the section initially */
+    transition: opacity 1s, visibility 1s;
+}
+
+
+
+/* About Us Section:///////////////////////////////////////////////////////////////////////////////////*/
+.about-us-section {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+    opacity: 0; /* Set the opacity to 0 */
+    visibility: hidden; /* Hide the section initially */
+    transition: opacity 1s, visibility 1s;
+}
+
+.about-us-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+}
