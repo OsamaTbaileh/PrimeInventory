@@ -1,0 +1,24 @@
+.card, .btn{
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover, .btn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    max-height: 150px;
+}
+
+.image-container img {
+width: auto;
+height: 100%;
+object-fit: contain;
+max-width: 100%;
+}
