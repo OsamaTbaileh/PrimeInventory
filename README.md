@@ -30,6 +30,43 @@ This web application is specifically designed to assist store managers in effici
 
 <br/>
 
+
+## Some Screenshots of The Website:
+## Home Page:
+![Home Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/home_page.jpeg)
+
+<br/><br/>
+
+## Locations Page:
+![Locations Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/locations_page.jpeg)
+
+<br/><br/>
+
+## Products Page:
+![Products Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/products_page.jpeg)
+
+<br/><br/>
+
+## Movements Page:
+![Movements Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/movements_page.jpeg)
+
+<br/><br/>
+
+## Normal Report Page:
+![Report Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/normal_report_page.jpeg)
+
+<br/><br/>
+
+## Advanced Report Page:
+![Report Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/advanced_report_page.jpeg)
+
+<br/><br/>
+
+## ERD:
+![ERD Diagram](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/ERD_diagram.jpg)
+
+<br/><br/>
+
 ## Getting Started:
 "Prime Inventory" requires [Python](https://www.python.org/downloads/) to run.
 1. **Clone the repository** to your local machine, open ur cmd & write down:
@@ -60,40 +97,8 @@ localhost:5000
 ```
 <br/>
 
+
 ## Support
 If you encounter any issues or have questions, please [submit an issue](https://github.com/OsamaTbaileh/PrimeInventory/issues) or contact me on one of my contacts [HERE](https://github.com/OsamaTbaileh/OsamaTbaileh)
-
-
-## Some Screenshots of The Website:
-## Home Page:
-![Home Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/home_page.jpeg)
-
-<br/><br/>
-
-## Locations Page:
-![Locations Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/locations_page.jpeg)
-
-<br/><br/>
-
-## Products Page:
-![Products Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/products_page.jpeg)
-
-<br/><br/>
-
-## Movements Page:
-![Movements Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/movements_page.jpeg)
-
-<br/><br/>
-
-## Report Page:
-![Report Page Screenshot](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/report_page.jpeg)
-
-<br/><br/>
-
-## ERD:
-![ERD Diagram](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/ERD_diagram.jpg)
-
-<br/><br/>
-
 ### Note:
 - login and registration will be added very soon, stay tuned.
