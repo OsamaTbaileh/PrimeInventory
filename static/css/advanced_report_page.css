@@ -1,0 +1,10 @@
+.report_table td {
+    min-width: 120px; /* Adjust the width value as needed */
+}
+
+.fixed-column {
+    position: sticky;
+    left: 0;
+    background-color: #fff;
+    z-index: 1;
+}
