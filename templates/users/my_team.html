@@ -1,0 +1,43 @@
+{% set css_files = '<link rel="stylesheet" href="../../static/css/my_team.css">' %}
+{% include 'general/header.html' %} 
+
+
+<div class="mx-0 px-0 mw-100 my-5 pb-3 d-flex justify-content-center">
+    <div class="w-100 mx-0 pt-5 px-3 px-sm-2 px-md-3 px-lg-4 bg" style="max-width: 1500px;">
+        {% if the_supervisor|length ==0 %}
+        <div class="row mx-auto p-3 col-md-9 bg-light rounded shaded-box d-flex justify-content-center">
+            <p class="text-danger text-center fw-bold">You have no team!</p>
+            <p class="text-center">To get a team, make sure that another 'Manager' add you to his team.</p>
+        </div>
+        {% else %}
+        <div class="row mx-auto p-3 col-md-6 bg-light rounded shaded-box d-flex justify-content-center">
+            <a aria-label="{{ the_supervisor.first_name }} {{ the_supervisor.last_name }}" href="/users/{{ the_supervisor.user_id }}" class="col-md-2 supervisor-img-container p-0">                 
+                <img src="/static/uploads/users_photos/{{ the_supervisor.image_id }}" alt="{{ the_supervisor.first_name }} {{ the_supervisor.last_name }} image" class="profile-img">
+            </a>
+            <div class="col-md-3 my-auto mx-md-1 supervisor-name-container">
+                <a class="text-center text-lg-start text-nowrap" href="/users/{{ the_supervisor.user_id }}">{{ the_supervisor.first_name }} {{ the_supervisor.last_name }}</a>
+                <h5 class="text-center text-lg-start fw-light mb-0">{{ the_supervisor.job_title }}</h5>
+            </div>
+        </div>
+        {% endif%}
+        
+        <div class="row mx-auto my-4 col-md-12">
+            {% for member in the_team %}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 custom-col p-0 m-0">
+                <div class="bg-light rounded d-flex flex-column align-items-center m-2 p-2 shaded-box">
+                    <a aria-label="{{ member.first_name }} {{ member.last_name }}" href="/users/{{ member.user_id }}" class="worker-img-container p-0 my-2">                 
+                        <img src="/static/uploads/users_photos/{{ member.image_id }}" alt="{{ member.first_name }} {{ member.last_name }} image" class="worker-profile-img">
+                    </a>
+                    <div class="worker-name-container">
+                        <a class="text-center mb-1" href="/users/{{ member.user_id }}">{{ member.first_name }} {{ member.last_name }}</a>
+                        <h6 class="text-center fw-light mb-1">{{ member.job_title }}</h6>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{%include 'general/footer.html'%}   
