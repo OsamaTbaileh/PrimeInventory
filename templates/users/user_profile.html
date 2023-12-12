@@ -1,0 +1,101 @@
+{% set css_files = '<link rel="stylesheet" href="../../static/css/user_profile.css">' %}
+{% include 'general/header.html' %} 
+
+
+<div class="mx-0 px-0 mw-100 my-5 pb-3 d-flex justify-content-center">
+    <div class="container mx-0 pt-5 px-3 px-sm-2 px-md-3 px-lg-4 bg">
+        <div class="row mx-auto p-3 col-md-11 bg-light rounded shaded-box">
+            <div class="col-md-2 text-center profile-img-container" class="user-data-label">
+                <img src="/static/uploads/users_photos/{{ the_user.image_id }}" alt="{{ the_user.first_name }} {{ the_user.last_name }} image" class="profile-img">
+            </div>
+            <div class="col-md-3 my-auto mx-md-1 flex-grow-1 user-name-container">
+                <h3 class="text-center text-md-start fw-light mt-2 mt-md-0">{{ the_user.first_name }} {{ the_user.last_name }}</h3>
+                <h4 class="text-center text-md-start fw-light mb-3 mb-md-0">{{ the_user.job_title }}</h4>
+                {% if the_user.job_title == "Worker" %}
+                <h6 class="text-center text-md-start fw-normal mt-4 mb-3 mb-md-0">Supervisor:
+                    {% if the_user.supervisor_first_name != None and the_user.supervisor_last_name != None %}
+                    <a href="/users/{{ the_user.supervisor_id }}" class="link-primary fw-bold text-decoration-none">{{ the_user.supervisor_first_name }} {{ the_user.supervisor_last_name }}</a>
+                    {% else %}
+                    <span class="text-danger">No Supervisor</span>
+                    {% endif %}
+                </h6>
+                {% endif %}
+            </div>
+            <div class="col-md-3 p-0 align-self-end text-md-right text-center ml-auto">
+                {% if session.user_id==the_user.user_id %}
+                <a href="/users/update_profile" class="btn btn-primary text-nowrap btn-sm">Update Profile</a>
+                {% elif checked_user.user_job_title=="Manager" and the_user.job_title=="Worker" and the_user.supervisor_id == None %}
+                <a href="/teams/add_to_team/{{ the_user.user_id }}" class="btn btn-success text-nowrap btn-sm">Add to Team</a>
+                {% elif session.user_id==the_user.supervisor_id %}
+                <a href="/teams/remove_from_team/{{ the_user.user_id }}" class="btn btn-danger text-nowrap btn-sm">Remove from Team</a>
+                {% elif not (session.user_id==1 and the_user.job_title == "Head Master") and session.user_id == 1 %}
+                <a href="/users/{{ the_user.user_id }}/delete_user" class="btn btn-danger text-nowrap btn-sm">Delete Account</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mx-auto my-4 col-md-11 d-flex justify-content-between">
+            <div class="col-lg-7 mb-3 mb-lg-0 bg-light p-4 rounded shaded-box overflow-auto">
+                <h3 class="mb-4 text-warning">Personal Information:</h3>
+                <div class="d-flex flex-column">
+                    <label class="user-data-label fw-bold mb-1">First Name:</label>
+                    <p class="mb-0">{{ the_user.first_name }}</p>
+                </div>
+                <hr class="m-0 my-2">
+                <div class="d-flex flex-column">
+                    <label class="user-data-label fw-bold mb-1">Last Name:</label>
+                    <p class="mb-0">{{ the_user.last_name }}</p>
+                </div>
+                <hr class="m-0 my-2">
+                <div class="d-flex flex-column">
+                    <label class="user-data-label fw-bold mb-1">Email:</label>
+                    <p class="mb-0">{{ the_user.email }}</p>
+                </div>
+                <hr class="m-0 my-2">
+                <div class="d-flex flex-column">
+                    <label class="user-data-label fw-bold mb-1">Phone Number:</label>
+                    <p class="mb-0">{{ the_user.phone }}</p>
+                </div>
+                <hr class="m-0 my-2">
+                <div class="d-flex flex-column">
+                    <label class="user-data-label fw-bold mb-1">Gender:</label>
+                    <p class="mb-0">{{ the_user.gender }}</p>
+                </div>
+                {% if session.user_id==the_user.user_id %}
+                <hr class="m-0 my-2">
+                <div class="d-flex flex-column">
+                    <a href="/users/update_profile/change_account_password" class="link-danger fw-bold text-decoration-none">Change your password</a>
+                </div>
+                {% endif %}
+            </div>
+
+            {% if session.user_id==the_user.user_id or session.user_id==1 or session.user_id==the_user.supervisor_id %}
+            <div class="col-lg-4 bg-light p-4 rounded shaded-box overflow-auto">
+                <h3 class="mb-4 text-warning">Address:</h3>
+                <div class="d-flex flex-column">
+                    <label class="user-data-label fw-bold mb-1">Country:</label>
+                    <p class="mb-0">{{ the_address.country }}</p>
+                </div>
+                <hr class="m-0 my-2">
+                <div class="d-flex flex-column">
+                    <label class="user-data-label fw-bold mb-1">City:</label>
+                    <p class="mb-0">{{ the_address.city }}</p>
+                </div>
+                <hr class="m-0 my-2">
+                <div class="d-flex flex-column">
+                    <label class="user-data-label fw-bold mb-1">Street:</label>
+                    <p class="mb-0">{{ the_address.street }}</p>
+                </div>
+                <hr class="m-0 my-2">
+                <div class="d-flex flex-column">
+                    <label class="user-data-label fw-bold mb-1">Postal Code:</label>
+                    <p class="mb-0">{{ the_address.postal_code }}</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>    
+</div>
+
+
+{%include 'general/footer.html'%}   
