@@ -1,13 +1,14 @@
 {% include 'general/header.html' %} 
 
-<div class="general-body min-vh-100">
-  <div class="container col-lg-7 px-4 py-3 mb-5 mx-auto form-style rounded form-body">
-    <h2 class="py-3">Update {{ the_location[0].name }} Location:</h2>
+
+<div class="mx-0 px-0 mw-100 my-5 pb-3 d-flex justify-content-center">
+  <div class="container col-lg-7 px-4 form-style rounded form-body">
+    <h2 class="py-3">Update {{ the_location.name }} Location:</h2>
 
     <form action="/locations/update_location" method="post" enctype="multipart/form-data">
 
       <div class="d-flex justify-content-center mb-3">
-        <img src="data:;base64,{{the_location[0].image_data}}" alt="Image of {{ the_location[0].name }} location." class="img-fluid rounded mx-auto" style="max-width: 50%;">
+        <img src="/static/uploads/locations_photos/{{ the_location.image_id }}" alt="Image of {{ the_location.name }} location." class="img-fluid rounded mx-auto" style="max-width: 50%;">
       </div>   
 
       <!-- Display errors validations for the user. -->
@@ -28,14 +29,14 @@
       <div class="form-group row mb-3 justify-content-center">
         <label for="location-id" class="col-sm-2 col-form-label text-center golden-form-label rounded mb-1 nowrap-text min-width-div">Location's ID:</label>
         <div class="col-sm-8 form-input-style ">
-          <input type="text" class="form-control text-center" id="location-id" placeholder="Insert updated ID" name="location_id" value="{{ the_location[0].location_id }}">
+          <input type="text" class="form-control text-center" id="location-id" placeholder="Insert updated ID" name="location_id" value="{{ the_location.location_id }}">
         </div>
       </div>
 
       <div class="form-group row mb-3 justify-content-center">
         <label for="location-name" class="col-sm-2 col-form-label text-center golden-form-label rounded mb-1 nowrap-text min-width-div">Location's name:</label>
         <div class="col-sm-8 form-input-style ">
-          <input type="text" class="form-control text-center" id="location-name" placeholder="Insert updated name" name="location_name" value="{{ the_location[0].name }}">
+          <input type="text" class="form-control text-center" id="location-name" placeholder="Insert updated name" name="location_name" value="{{ the_location.name }}">
         </div>
       </div>
 
@@ -46,9 +47,10 @@
         </div>
       </div>
 
-      <input type="hidden" name="old_image" value="{{ the_location[0].image_data }}"></input>
-      <input type="hidden" name="old_location_id" value="{{the_location[0].location_id}}">
-      <input type="hidden" name="old_location_name" value="{{the_location[0].name}}">
+      <input type="hidden" name="old_image" value="{{ the_location.image_id }}"></input>
+      <input type="hidden" name="old_location_id" value="{{ the_location.location_id }}">
+      <input type="hidden" name="old_location_name" value="{{ the_location.name }}">
+      <input type="hidden" name="user_id" value="{{ session.user_id }}">
 
       <div class="form-group row mb-3 justify-content-center">
         <div class="col-sm-7 text-center">
@@ -59,8 +61,8 @@
     </form>
 
     <!-- The delete button. -->
-    <form action="/locations/delete_location/{{the_location[0].location_id}}" method="POST" class="row mb-3 justify-content-end">
-      <input type="hidden" name="location_id" value="{{the_location.location_id}}">
+    <form action="/locations/delete_location/{{ the_location.location_id }}" method="POST" class="row mb-3 justify-content-end">
+      <input type="hidden" name="location_id" value="{{ the_location.location_id }}">
       <div class="col-sm-7 text-end">
         <button type="submit" class="red-button glow-button" onclick="confirmDelete(event)">Delete Location</button>
       </div>
@@ -94,5 +96,6 @@
     }
   }
 </script>
+
 
 {%include 'general/footer.html'%}  
