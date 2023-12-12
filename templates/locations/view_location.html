@@ -1,30 +1,59 @@
 {% include 'general/header.html' %} 
 
-<div class="general-body min-vh-100">
-    <div class="container col-lg-10 px-4 py-3 mx-auto mb-5 form-style rounded form-body">
-        <h2 class="py-3">Details of {{the_location[0].name}} location:</h2>
+
+<div class="mx-0 px-0 mw-100 my-5 pb-3 d-flex justify-content-center">
+    <div class="container col-lg-7 px-4 form-style rounded form-body">
+        <h2 class="py-3">Details of {{ the_location.name }} location:</h2>
 
         <div class="d-flex justify-content-center mb-3">
-            <img src="data:;base64,{{the_location[0].image_data}}" alt="Image of {{ the_location[0].name }} location." class="img-fluid rounded mx-auto" style="max-width: 40%;">
+            <img src="/static/uploads/locations_photos/{{ the_location.image_id }}" alt="Image of {{ the_location.name }} location." class="img-fluid rounded mx-auto" style="max-width: 40%;">
         </div>    
 
         <div class="form-group row mb-3 justify-content-center">
             <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Location's ID:</label>
             <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
-                {{the_location[0].location_id}}
+                {{ the_location.location_id }}
             </p>
         </div>
 
         <div class="form-group row mb-3 justify-content-center">
             <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Location's Name:</label>
             <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
-                {{the_location[0].name}}
+                {{ the_location.name }}
+            </p>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Created By:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{ the_location.creator_full_name }}
+            </p>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Created at:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{ the_location.created_at }}
+            </p>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Updated By:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{ the_location.updater_full_name }}
+            </p>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Updated At:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{ the_location.updated_at }}
             </p>
         </div>
 
         <div class="table-responsive">
             <div class="mb-3 text-center">
-                <a href="/products/add_new_product/{{the_location[0].location_id}}" class="btn btn-warning btn-lg">Add New Product</a>
+                <a href="/products/add_new_product/{{ the_location.location_id }}" class="btn btn-warning btn-lg">Add New Product</a>
             </div>
 
             <table class="table custom-table table-hover" id="table">
@@ -49,7 +78,7 @@
                         <td>{{ one_product.total_out_quantity }}</td>
                         <td>{{ one_product.total_quantity }}</td>
                         <td>
-                            <form action="/products/delete_product/{{one_product.product_id}}" method="POST">
+                            <form action="/products/delete_product/{{ one_product.product_id }}" method="POST">
                                 <input type="hidden" name="product_id" value="{{ one_product.product_id }}">
                                 <div class="btn-group">
                                     <a href="/products/view_product/{{ one_product.product_id }}" class="btn btn-success">View</a>
@@ -79,6 +108,7 @@
         return false;
       }
     }
-  </script>
+</script>
+
 
 {%include 'general/footer.html'%}  
