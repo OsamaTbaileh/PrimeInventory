@@ -1,56 +1,58 @@
 {% include 'general/header.html' %} 
 
-<div class="general-body min-vh-100">
-    <div class="container col-lg-7 px-4 py-3 mx-auto mb-5 form-style rounded form-body">
-      <h2 class="py-3">Add New Location:</h2>
 
-      <form action="/locations/add_new_location" method="post" enctype="multipart/form-data">
-        <!-- Display errors validations for the user. -->
-        <div class="row justify-content-center">
-          <div class="col-sm-11">
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                <ul  style="color: red;">
-                  {% for message in messages %}
-                    <li>{{ message }}</li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            {% endwith %}
+<div class="mx-0 px-0 mw-100 my-5 pb-3 pt-5 d-flex justify-content-center">
+  <div class="container col-lg-7 px-4 form-style rounded form-body">
+    <h2 class="py-3">Add New Location:</h2>
+
+    <form action="/locations/add_new_location" method="post" enctype="multipart/form-data">
+      <!-- Display errors validations for the user. -->
+      <div class="row justify-content-center">
+        <div class="col-sm-11">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul  style="color: red;">
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+
+      <div class="form-group row mb-3 justify-content-center">
+        <label for="location-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Location's ID:</label>
+        <div class="col-sm-8 form-input-style ">
+          <input type="text" class="form-control text-center" id="location-id" placeholder="Insert ID" name="location_id">
+        </div>
+      </div>
+
+      <div class="form-group row mb-3 justify-content-center">
+        <label for="location-name" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Location's Name:</label>
+        <div class="col-sm-8 form-input-style min-width-">
+          <input type="text" class="form-control text-center" id="location-name" placeholder="Type the name here" name="location_name">
+        </div>
+      </div>
+
+      <div class="form-group row mb-3 justify-content-center">
+        <label for="upload-image" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Upload Image:</label>
+        <div class="col-sm-8 form-input-style text-center">
+          <input type="file" accept="image/gif, image/jpeg, image/jpg, image/png" class="form-control-file " id="upload-image" name="location_image">
+        </div>
+      </div>
+
+      <input type="hidden" name="adding" value="adding"></input>
+      <input type="hidden" name="user_id" value="{{ session.user_id }}">
+
+      <div class="form-group row mb-3 justify-content-center">
+          <div class="col-sm-4 text-center">
+            <button type="submit" class="golden-button glow-button">Add</button>
+            <p id="processing-message" style="display: none;">Please wait a few seconds to process the new location.</p>
           </div>
-        </div>
-
-        <div class="form-group row mb-3 justify-content-center">
-          <label for="location-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Location's ID:</label>
-          <div class="col-sm-8 form-input-style ">
-            <input type="text" class="form-control text-center" id="location-id" placeholder="Insert ID" name="location_id">
-          </div>
-        </div>
-
-        <div class="form-group row mb-3 justify-content-center">
-          <label for="location-name" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Location's Name:</label>
-          <div class="col-sm-8 form-input-style min-width-">
-            <input type="text" class="form-control text-center" id="location-name" placeholder="Type the name here" name="location_name">
-          </div>
-        </div>
-
-        <div class="form-group row mb-3 justify-content-center">
-          <label for="upload-image" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Upload Image:</label>
-          <div class="col-sm-8 form-input-style text-center">
-            <input type="file" class="form-control-file " id="upload-image" name="location_image">
-          </div>
-        </div>
-
-        <input type="hidden" name="adding" value="adding"></input>
-
-        <div class="form-group row mb-3 justify-content-center">
-            <div class="col-sm-4 text-center">
-              <button type="submit" class="golden-button glow-button">Add</button>
-              <p id="processing-message" style="display: none;">Please wait a few seconds to process the new location.</p>
-            </div>
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
 </div>
 
 
@@ -64,5 +66,6 @@
     });
   });
 </script>
+
 
 {%include 'general/footer.html'%}  
