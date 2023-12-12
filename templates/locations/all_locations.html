@@ -1,26 +1,28 @@
+{% set css_files = '<link rel="stylesheet" href="../../static/css/all_locations.css">' %}
 {% include 'general/header.html' %} 
 
-<div class="general-body min-vh-100">
-  <div class="container my-5 pt-5">
+
+<div class="mx-0 px-0 mw-100 my-5 pb-3 d-flex justify-content-center">
+  <div class="container mx-0 pt-5 px-3 px-sm-2 px-md-3 px-lg-4">
     <div class="d-flex justify-content-between align-items-center">
       <h1 class="text-warning">All Locations:</h1>
-      <div class="btn-container " >
-        <a href="/locations/add_new_location" class="btn btn-warning btn-lg ">Add New Location</a>
+      <div class="btn-container">
+        <a href="/locations/add_new_location" class="btn btn-warning btn-sm">Add New Location</a>
       </div>
     </div>
     <div class="row">
       {% for one_location in all_locations %}
       <div class="col-md-4 mb-4">
-        <div class="card h-100 d-flex flex-column">
+        <div class="card h-100 d-flex flex-column overflow-hidden rounded-3" >
           <div class="overflow-hidden text-center">
-            <img src="data:;base64,{{one_location.image_data}}" class="card-img-top mx-auto" style="height: 150px; width: auto;" alt="Image of {{one_location["name"]}}.">
+            <img src="/static/uploads/locations_photos/{{ one_location.image_id }}" class="card-img-top mx-auto" style="height: 150px; width: auto;" alt="Image of {{one_location.name}}.">
           </div>
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title text-center">{{one_location["name"]}}</h5>
-            <p class="card-text text-center">{{one_location["location_id"]}}</p>
+            <h5 class="card-title text-center">{{ one_location.name }}</h5>
+            <p class="card-text text-center">{{ one_location.location_id }}</p>
             <div class="mt-auto d-flex justify-content-around">
-              <a href="/locations/view_location/{{one_location["location_id"]}}" class="btn btn-warning me-2">View</a>
-              <a href="/locations/update_location/{{one_location["location_id"]}}" class="btn btn-primary">Edit</a>
+              <a href="/locations/view_location/{{ one_location.location_id }}" class="btn btn-warning me-2">View</a>
+              <a href="/locations/update_location/{{ one_location.location_id }}" class="btn btn-primary">Edit</a>
             </div>
           </div>
         </div>
@@ -29,5 +31,6 @@
     </div>
   </div>
 </div>
+
 
 {%include 'general/footer.html'%}   
