@@ -1,7 +1,8 @@
 {% include 'general/header.html' %} 
 
-<div class="general-body min-vh-100">
-  <div class="container col-lg-7 px-4 py-3 mx-auto mb-5 form-style rounded form-body">
+
+<div class="mx-0 px-0 mw-100 my-5 pb-3 d-flex justify-content-center">
+  <div class="container col-lg-7 px-4 form-style rounded form-body">
     <h2 class="py-3">Add New Product:</h2>
 
     <form action="/products/add_new_product" method="post">
@@ -159,6 +160,8 @@
         </div>
       </div>
 
+      <input type="hidden" name="user_id" value="{{ session.user_id }}">
+
       <div class="form-group row mb-3 justify-content-center">
         <div class="col-sm-4 text-center">
           <button type="submit" class="golden-button glow-button">Add</button>
@@ -167,8 +170,6 @@
     </form>
   </div>
 </div>
-  
-
 
 
 <!-- This script make one of the "product_id_input" & "product_id_select" blur and disabled when the user choose to use the other. -->
@@ -205,7 +206,6 @@
     });
   });
 </script>
-
 
 <!-- This script make one section of the two sections of the form blur and disabled when the user check the box above the other section. -->
 <script>
@@ -281,5 +281,6 @@
     }
   }
 </script>
+
 
 {%include 'general/footer.html'%}   
