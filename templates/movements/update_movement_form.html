@@ -1,8 +1,9 @@
 {% include 'general/header.html' %} 
 
-<div class="general-body min-vh-100">
-  <div class="container col-lg-7 px-4 py-3 mx-auto mb-5 form-style rounded form-body">
-    <h2 class="py-3">Edit {{the_movement[0].movement_id}} Movement:</h2>
+
+<div class="mx-0 px-0 mw-100 my-5 pb-3 d-flex justify-content-center">
+  <div class="container col-lg-7 px-4 form-style rounded form-body">
+    <h2 class="py-3">Edit {{ the_movement.movement_id }} Movement:</h2>
 
     <form action="/movements/update_movement" method="post" enctype="multipart/form-data">
       <!-- Display errors validations for the user. -->
@@ -23,7 +24,7 @@
       <div class="form-group row mb-3 justify-content-center">
         <label for="movement-id" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Movement's ID:</label>
         <div class="col-sm-8 form-input-style ">
-          <input type="text" class="form-control text-center" id="movement-id" placeholder="Insert updated ID" name="movement_id" value="{{ the_movement[0].movement_id }}">
+          <input type="text" class="form-control text-center" id="movement-id" placeholder="Insert updated ID" name="movement_id" value="{{ the_movement.movement_id }}">
         </div>
       </div>
 
@@ -31,9 +32,8 @@
         <label for="from-location-select" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">From Location:</label>
         <div class="col-sm-8 form-input-style">
           <select class="form-select text-center" id="from-location-select" name="from_location_id">
-            <option value="NULL" {% if the_movement[0].from_location_id == None %}selected{% endif %}>None</option>
             {% for one_location in all_locations %}
-            <option value="{{ one_location.location_id }}" {% if one_location.location_id == the_movement[0].from_location_id %}selected{% endif %}>{{ one_location.name }}</option>
+            <option value="{{ one_location.location_id }}" {% if one_location.location_id == the_movement.from_location_id %}selected{% endif %}>{{ one_location.name }}</option>
             {% endfor %}
           </select>
         </div>
@@ -43,43 +43,41 @@
         <label for="from-location-select" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">To Location:</label>
         <div class="col-sm-8 form-input-style">
           <select class="form-select text-center" id="to-location-select" name="to_location_id">
-
             {% for one_location in all_locations %}
-            <option value="{{ one_location.location_id }}" {% if one_location.location_id == the_movement[0].to_location_id %}selected{% endif %}>{{ one_location.name }}</option>
+            <option value="{{ one_location.location_id }}" {% if one_location.location_id == the_movement.to_location_id %}selected{% endif %}>{{ one_location.name }}</option>
             {% endfor %}
           </select>
         </div>
       </div>
 
-
-      <div id="existing-product-section">
-        <div class="form-group row mb-3 justify-content-center">
-          <label for="product-id-select" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Select Product:</label>
-          <div class="col-sm-8 form-input-style">
-            <select class="form-select text-center" id="product-id-select" name="product_id_select" onchange="handleProductSelect()">
-            </select>
-          </div>
+      <div class="form-group row mb-3 justify-content-center">
+        <label for="product-id-select" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Select Product:</label>
+        <div class="col-sm-8 form-input-style">
+          <select class="form-select text-center" id="product-id-select" name="product_id_select" onchange="handleProductSelect()">
+          </select>
         </div>
+      </div>
 
       <div class="form-group row mb-3 justify-content-center">
         <label for="product-id-input" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">or Use Product ID:</label>
         <div class="col-sm-8 form-input-style">
-          <input type="text" class="form-control text-center" id="product-id-input" name="product_id_input" placeholder="Enter updated specefic product ID directly" value="{{ the_movement[0].product_id }}">
+          <input type="text" class="form-control text-center" id="product-id-input" name="product_id_input" placeholder="Enter updated specefic product ID directly" value="{{ the_movement.product_id }}">
         </div>
       </div>
 
       <div class="form-group row mb-3 justify-content-center">
         <label for="movement-quantity" class="col-sm-2 col-form-label golden-form-label rounded mb-1 nowrap-text min-width-div">Quantity:</label>
         <div class="col-sm-8 form-input-style min-width-">
-          <input type="number" class="form-control text-center" id="movement-quantity" placeholder="Type the updated movement quantity here" name="movement_quantity" value="{{ the_movement[0].quantity }}">
+          <input type="number" class="form-control text-center" id="movement-quantity" placeholder="Type the updated movement quantity here" name="movement_quantity" value="{{ the_movement.quantity }}">
         </div>
       </div>
 
-      <input type="hidden" name="old_movement_id" value="{{the_movement[0].movement_id}}">
-      <input type="hidden" name="old_from_location_id" value="{{the_movement[0].from_location_id}}">
-      <input type="hidden" name="old_to_location_id" value="{{the_movement[0].to_location_id}}">
-      <input type="hidden" name="old_product_id" value="{{the_movement[0].product_id}}">
-      <input type="hidden" name="old_movement_quantity" value="{{the_movement[0].quantity}}">
+      <input type="hidden" name="old_movement_id" value="{{ the_movement.movement_id }}">
+      <input type="hidden" name="old_from_location_id" value="{{ the_movement.from_location_id }}">
+      <input type="hidden" name="old_to_location_id" value="{{ the_movement.to_location_id }}">
+      <input type="hidden" name="old_product_id" value="{{ the_movement.product_id }}">
+      <input type="hidden" name="old_movement_quantity" value="{{ the_movement.quantity }}">
+      <input type="hidden" name="user_id" value="{{ session.user_id }}">
 
       <div class="form-group row mb-3 justify-content-center">
         <div class="col-sm-4 text-center">
@@ -129,7 +127,6 @@
   });
 </script>
 
-
 <!-- This script make the choosen "From Location" not appaer as an option in the "To Location" select menu. -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -154,32 +151,10 @@
           toLocationSelect.appendChild(option);
         }
       }
-  
-      // Remove the "None" option from the "To Location" select input if it is selected in the "From Location" select input.
-      if (selectedLocationId === 'NULL') {
-        var noneOption = document.querySelector('#to-location-select option[value="NULL"]');
-        if (noneOption) {
-          noneOption.remove();
-        }
-      } else {
-        // Add back the "None" option to the "To Location" select input if it doesn't exist.
-        var noneOption = document.querySelector('#to-location-select option[value="NULL"]');
-        if (!noneOption) {
-          var noneOption = document.createElement('option');
-          noneOption.value = 'NULL';
-          noneOption.textContent = 'None';
-          toLocationSelect.appendChild(noneOption);
-        }
-      }
     });
   });
   
   </script>
-
-
-
-
-
 
 <!-- This product fetch the products that are availale at the choosen "From Location"and list them in the "Select Product" select menu. -->
 <script>
@@ -194,8 +169,8 @@
       // Add the extra standard option.
       $("#product-id-select").append('<option value="">Select a New Product</option>');
       
-      // Check if the "None" option is selected.
-      if (selectedLocationId == "NULL") {
+      // Check if the "Out Sourcing" option is selected.
+      if (selectedLocationId == "out") {
         // Make AJAX request to get all products.
         $.ajax({
           url: "/products/get_all_products",
