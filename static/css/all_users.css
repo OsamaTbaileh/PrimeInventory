@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+
+.user-img-container {
+    min-width: 90px !important;
+    max-width: 90px !important;
+    border-radius: 50%;
+}
+
+
+.user-img-container:hover + .head-master-name-container a{
+    color: #FF4433;
+}
+.user-img-container:hover + .manager-name-container a{
+    color: #93C572;
+}
+.user-img-container:hover + .worker-name-container a{
+    color: #e5c970;
+}
+
+
+.head-master-name-container a:hover {
+    color: #FF4433;
+}
+.manager-name-container a:hover {
+    color: #93C572;
+}
+.worker-name-container a:hover {
+    color: #e5c970;
+}
+
+
+.head-master-profile-img,
+.manager-profile-img,
+.worker-profile-img {
+    max-width: 90px; 
+    max-height: 90px;
+    border-radius: 100% !important;
+    aspect-ratio: 1;
+    min-height: 90px;
+    object-fit: cover;
+    border-width: 4px;
+    border-style: solid;
+    cursor: pointer;
+}
+
+
+.head-master-profile-img {
+    border-color: #FF4433;
+}
+.manager-profile-img {
+    border-color: #93C572;
+}
+.worker-profile-img {
+    border-color: #e5c970;
+}
+
+
+.head-master-name-container a, 
+.manager-name-container a, 
+.worker-name-container a {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    color: black;
+}
+
+.shaded-box {
+    box-shadow: 0 3px 7px 0 rgba(0,0,0,.2);
+}
+
+.user-data-label {
+    min-width: 150px;
+}
+
+.btn-group .btn {
+    border: 1px solid rgba(0,0,0,.3);
+
+}
+
+/* These styles are for the 4 buttons at the top of the all_users.html  */
+.btn.active-btn {
+    transform: scaleY(1.2);
+    border-radius: 5px !important;
+
+}
+.btn.active-btn[data-user-type="all"] {
+    background-color: #A7C7E7 !important;
+}
+.btn.active-btn[data-user-type="managers"] {
+    background-color: #93C572 !important;
+}
+.btn.active-btn[data-user-type="workers"],
+.btn.active-btn[data-user-type="new_workers"] {
+    background-color: #e5c970 !important;
+}
+.btn.active-btn:focus {
+    box-shadow: none !important;
+}
+
+
+/* Custom CSS for the specific layout */
+@media (min-width: 1200px) {
+    .custom-col {
+        flex: 0 0 16.66667% !important;
+        max-width: 16.66667% !important;
+    }
+}
+@media (max-width: 1368px) {
+    .custom-col {
+        flex: 0 0 20% !important;
+        max-width: 20% !important;
+    }
+}
+@media (max-width: 1146px) {
+    .custom-col {
+        flex: 0 0 25% !important;
+        max-width: 25% !important;
+    }
+}
+@media (max-width: 925px) {
+    .custom-col {
+        flex: 0 0 33.33333% !important;
+        max-width: 33.33333% !important;
+    }
+}
+@media (max-width: 705px) {
+    .custom-col {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+}
+@media (max-width: 480px) {
+    .custom-col {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+}

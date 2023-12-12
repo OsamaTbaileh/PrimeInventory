@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+
+.supervisor-img-container {
+    min-width: 120px !important;
+    max-width: 120px !important;
+    border-radius: 50%;
+}
+
+.worker-img-container {
+    min-width: 90px !important;
+    max-width: 90px !important;
+    border-radius: 50%;
+}
+
+.supervisor-img-container:hover + .supervisor-name-container a{
+    color: #e5c970;
+}
+
+.worker-img-container:hover + .worker-name-container a{
+    color: #e5c970;
+}
+
+.supervisor-name-container a:hover {
+    color: #e5c970;
+}
+
+.worker-name-container a:hover {
+    color: #e5c970;
+}
+
+.profile-img {
+    max-width: 120px; 
+    max-height: 120px;
+    border-radius: 100% !important;
+    aspect-ratio: 1;
+    min-height: 120px;
+    object-fit: cover;
+    border: 4px solid #e5c970;
+    cursor: pointer;
+}
+
+.worker-profile-img {
+    max-width: 90px; 
+    max-height: 90px;
+    border-radius: 100% !important;
+    aspect-ratio: 1;
+    min-height: 90px;
+    object-fit: cover;
+    border: 4px solid #e5c970;
+    cursor: pointer;
+}
+
+.supervisor-name-container {
+    min-width: 230px;
+    
+}
+
+.supervisor-name-container a{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    color: black;
+}
+
+.worker-name-container a{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    color: black;
+}
+
+.shaded-box {
+    box-shadow: 0 3px 7px 0 rgba(0,0,0,.2);
+}
+
+.user-data-label {
+    min-width: 150px;
+}
+
+
+
+/* Custom CSS for the specific layout */
+@media (min-width: 1200px) {
+    .custom-col {
+        flex: 0 0 16.66667% !important;
+        max-width: 16.66667% !important;
+    }
+}
+@media (max-width: 1368px) {
+    .custom-col {
+        flex: 0 0 20% !important;
+        max-width: 20% !important;
+    }
+}
+@media (max-width: 1146px) {
+    .custom-col {
+        flex: 0 0 25% !important;
+        max-width: 25% !important;
+    }
+}
+@media (max-width: 925px) {
+    .custom-col {
+        flex: 0 0 33.33333% !important;
+        max-width: 33.33333% !important;
+    }
+}
+@media (max-width: 705px) {
+    .custom-col {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+}
+@media (max-width: 480px) {
+    .custom-col {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+}
