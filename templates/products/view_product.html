@@ -1,43 +1,58 @@
 {% include 'general/header.html' %} 
 
-<div class="general-body min-vh-100">
-    <div class="container col-lg-10 px-4 py-3 mx-auto mb-5 form-style rounded form-body">
-        <h2 class="py-3">Details of {{the_product[0].name}} product:</h2>
+
+<div class="mx-0 px-0 mw-100 my-5 pb-3 d-flex justify-content-center">
+    <div class="container col-lg-7 px-4 form-style rounded form-body">
+        <h2 class="py-3">Details of {{ the_product.name }} product:</h2>
 
         <div class="form-group row mb-3 justify-content-center">
             <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Product's ID:</label>
             <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
-                {{the_product[0].product_id}}
+                {{ the_product.product_id }}
             </p>
         </div>
 
         <div class="form-group row mb-3 justify-content-center">
             <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Product's Name:</label>
             <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
-                {{the_product[0].name}}
+                {{ the_product.name }}
             </p>
         </div>
 
         <div class="form-group row mb-3 justify-content-center">
-          <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Product's Price:</label>
-          <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
-              {{the_product[0].price}}
-          </p>
-      </div>
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Product's Price:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{ the_product.price }}
+            </p>
+        </div>
 
-      <div class="form-group row mb-3 justify-content-center">
-        <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Created At:</label>
-        <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
-            {{the_product[0].created_at}}
-        </p>
-      </div>
+        <div class="form-group row mb-3 justify-content-center">
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Created By:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{ the_product.creator_full_name }}
+            </p>
+        </div>
 
-      <div class="form-group row mb-3 justify-content-center">
-        <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Updated At:</label>
-        <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
-            {{the_product[0].updated_at}}
-        </p>
-      </div>
+        <div class="form-group row mb-3 justify-content-center">
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Created At:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{ the_product.created_at }}
+            </p>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Updated By:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{ the_product.updater_full_name }}
+            </p>
+        </div>
+
+        <div class="form-group row mb-3 justify-content-center">
+            <label class="col-sm-2 col-form-label text-center golden-form-label rounded my-1 nowrap-text min-width-div">Updated At:</label>
+            <p class="col-sm-5 form-input-style text-center bg-light rounded my-1 py-2 mx-3 ">
+                {{ the_product.updated_at }}
+            </p>
+        </div>
 
         <div class="table-responsive">
             <div class="mb-3 text-center">
@@ -66,7 +81,6 @@
         </div>
     </div>
 </div>
-
 
 
 {%include 'general/footer.html'%}  
