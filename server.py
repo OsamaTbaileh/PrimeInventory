@@ -8,7 +8,7 @@ from routes.movements_routes import app as movements_app
 from routes.general_routes import app as general_app
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
-app.secret_key = 'your_secret_key'
+app.secret_key = 'commander656'
 
 # Register routes
 app.register_blueprint(user_app)
