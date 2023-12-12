@@ -1,0 +1,316 @@
+{% set css_files = '<link rel="stylesheet" href="../../static/css/user_profile.css">' %}
+{% include 'general/header.html' %} 
+
+
+<div class="mx-0 px-0 mw-100 my-5 pb-3 d-flex justify-content-center">
+    <div class="container mx-0 pt-5 px-3 px-sm-2 px-md-3 px-lg-4 bg">
+        <div class="row mx-auto p-3 col-md-11 bg-light rounded shaded-box">
+            <div class="col-md-2 text-center profile-img-container">
+                <!-- Display the existing image -->
+                <img id="profile-img" src="/static/uploads/users_photos/{{ the_user.image_id }}" alt="{{ the_user.first_name }} {{ the_user.last_name }} image" class="profile-img" onclick="uploadNewImage()">
+            </div>
+
+            <div class="col-md-3 my-auto mx-md-1 flex-grow-1 user-name-container">
+                <h3 class="text-center text-md-start fw-light mt-2 mt-md-0">{{ the_user.first_name }} {{ the_user.last_name }}</h3>
+                <h4 class="text-center text-md-start fw-light mb-3 mb-md-0">{{ the_user.job_title }}</h4>
+                {% if the_user.job_title == "Worker" %}
+                <h6 class="text-center text-md-start fw-normal mt-4 mb-3 mb-md-0">Supervisor: {{ the_user.supervisor_id }}</h6>
+                {% endif %}
+            </div>
+
+            {% if not (session.user_id==1 and checked_user.user_job_title == "Head Master") %}
+            <div class="col-md-3 p-0 align-self-end text-md-right text-center ml-auto">
+                <a href="/users/{{ the_user.user_id }}/delete_user" class="btn btn-danger text-nowrap btn-sm">Delete Account</a>
+            </div>
+            {% endif %}
+        </div>
+
+
+        <form action="/users/update_user_profile" method="post" enctype="multipart/form-data" class="row mx-auto my-4 col-md-11 d-flex justify-content-between general-containe">
+            <div class=" col-sm-12 col-lg-7 mb-3 mb-lg-0 bg-light p-4 rounded shaded-box overflow-auto">
+                <h3 class="mb-4 text-warning">Personal Information:</h3>
+
+                <!-- First Name -->
+                {% with messages = get_flashed_messages(category_filter=['first_name']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning p-0 m-0" role="alert">
+                        {{message}}
+                            </div> 
+                    {% endfor %}
+                {% endif %} 
+                {% endwith %}
+                <div class="d-flex flex-column">
+                    <label for="" class="user-data-label mb-1 fw-bold d-flex align-items-center"><span>First Name:</span></label>
+                    <input type="text" class="form-control" value="{{ the_user.first_name }}" placeholder="Enter your first name" name="first_name">
+                </div>
+                <hr class="m-0 my-2">
+
+                <!-- Last Name -->
+                {% with messages = get_flashed_messages(category_filter=['last_name']) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning p-0 m-0" role="alert">
+                            {{message}}
+                        </div> 
+                    {% endfor %}
+                    {% endif %} 
+                {% endwith %}
+                <div class="d-flex flex-column">
+                    <label for="" class="user-data-label mb-1 fw-bold d-flex align-items-center"><span>Last Name:</span></label>
+                    <input type="text" class="form-control" value="{{ the_user.last_name }}" placeholder="Enter your last name" name="last_name">
+                </div>
+                <hr class="m-0 my-2">
+
+                <!-- email -->
+                {% with messages = get_flashed_messages(category_filter=['email']) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning p-0 m-0" role="alert">
+                            {{message}}
+                        </div> 
+                    {% endfor %}
+                    {% endif %} 
+                {% endwith %}
+                <div class="d-flex flex-column">
+                    <label for="" class="user-data-label mb-1 fw-bold d-flex align-items-center"><span>Email:</span></label>
+                    <input type="email" class="form-control" value="{{ the_user.email }}"  placeholder="Enter your email" name="email">
+                </div>
+                <hr class="m-0 my-2">
+
+                <!-- Phone Number -->
+                {% with messages = get_flashed_messages(category_filter=['phone']) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning p-0 m-0" role="alert">
+                            {{message}}
+                        </div> 
+                    {% endfor %}
+                    {% endif %} 
+                {% endwith %}
+                <div class="d-flex flex-column">
+                    <label for="" class="user-data-label mb-1 fw-bold d-flex align-items-center"><span>Phone Number:</span></label>
+                    <input type="tel" id="phone" placeholder="Phone Number" value="{{ the_user.phone }}" class="form-control" name="phone">
+                </div>
+                <hr class="m-0 my-2">
+
+                <!-- Gender -->
+                {% with messages = get_flashed_messages(category_filter=['gender']) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning p-0 m-0" role="alert">
+                            {{message}}
+                        </div> 
+                    {% endfor %}
+                    {% endif %} 
+                {% endwith %}
+                <div class="d-flex flex-column">
+                    <label class="user-data-label mb-1 fw-bold d-flex align-items-center"><span>Gender:</span></label>
+                    <div class="d-flex flex-row col-md-9 px-0 ps-2">
+                        <div class="radio-box mx-1">
+                            <label for="male">
+                                <input type="radio" id="male" name="gender" value="m" {% if the_user.gender == 'Male' %}checked{% endif %}>
+                                Male
+                            </label>
+                        </div>
+                        <div class="radio-box mx-1">
+                            <label for="female">
+                                <input type="radio" id="female" name="gender" value="f" {% if the_user.gender == 'Female' %}checked{% endif %}>
+                                Female
+                            </label>
+                        </div>
+                        <div class="radio-box mx-1">
+                            <label for="other">
+                                <input type="radio" id="other" name="gender" value="o" {% if the_user.gender == 'Other' %}checked{% endif %}>
+                                Other
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                {% if session.user_id != 1 %}
+                <hr class="m-0 my-2">
+
+                <!-- Job Title -->
+                {% with messages = get_flashed_messages(category_filter=['job_title']) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning p-0 m-0" role="alert">
+                            {{message}}
+                        </div> 
+                    {% endfor %}
+                    {% endif %} 
+                {% endwith %}
+                <div class="d-flex flex-column">
+                    <label for="" class="user-data-label mb-1 fw-bold d-flex align-items-center"><span>Job Title:</span></label>
+                    <select class="form-select" aria-label="Default select example" name="job_title" >
+                        <option value="">Choose here</option>
+                        <option value="2" {% if the_user.job_title == 'Manager' %}selected{% endif %}>Manager</option>
+                        <option value="3" {% if the_user.job_title == 'Worker' %}selected{% endif %}>Worker</option>
+                    </select>
+                </div>
+                {% endif %}
+                {% if session.user_id == 1 %}
+                <input type="hidden" name="job_title" value="1">
+                {% endif %}
+            </div>
+
+            <div class="col-lg-4 bg-light p-4 rounded shaded-box overflow-auto">
+                <h3 class="mb-4 text-warning">Address:</h3>
+
+                <!-- Country -->
+                {% with messages = get_flashed_messages(category_filter=['country']) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning p-0 m-0" role="alert">
+                        {{message}}
+                        </div> 
+                    {% endfor %}
+                    {% endif %} 
+                {% endwith %}
+                <div class="d-flex flex-column">
+                    <label for="" class="user-data-label mb-1 fw-bold d-flex align-items-center"><span>Country:</span></label>
+                    <select id="country" class="form-select" aria-label="Default select example" name="country">
+                        <option value="">Choose here</option>
+                    </select>
+                </div>
+                <hr class="m-0 my-2">
+
+                <!-- City -->
+                {% with messages = get_flashed_messages(category_filter=['city']) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning p-0 m-0" role="alert">
+                        {{message}}
+                        </div> 
+                    {% endfor %}
+                    {% endif %} 
+                {% endwith %}
+                <div class="d-flex flex-column">
+                    <label for="" class="user-data-label mb-1 fw-bold d-flex align-items-center"></span>City:</span></label>
+                    <input type="text" class="form-control" value="{{ the_address.city }}" placeholder="Enter your city" name="city">
+                </div>
+                <hr class="m-0 my-2">
+
+                <!-- Street -->
+                {% with messages = get_flashed_messages(category_filter=['street']) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning p-0 m-0" role="alert">
+                        {{message}}
+                        </div> 
+                    {% endfor %}
+                    {% endif %} 
+                {% endwith %}
+                <div class="d-flex flex-column">
+                    <label for="" class="user-data-label mb-1 fw-bold d-flex align-items-center"><span>Street:</span></label>
+                    <input type="text" class="form-control" value="{{ the_address.street }}" placeholder="Enter your street" name="street">
+                </div>
+                <hr class="m-0 my-2">
+
+                <!-- Postal Code -->
+                {% with messages = get_flashed_messages(category_filter=['postal_code']) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning p-0 m-0" role="alert">
+                        {{message}}
+                        </div> 
+                    {% endfor %}
+                    {% endif %} 
+                {% endwith %}
+                <div class="d-flex flex-column">
+                    <label for="" class="user-data-label mb-1 fw-bold d-flex align-items-center"><span>Postal Code:</span></label>
+                    <input type="text" class="form-control" value="{{ the_address.postal_code }}" placeholder="Enter your postal code" name="postal_code">
+                </div>
+            </div>
+
+            <!-- Hidden file input for image upload -->
+            <input type="file" id="image-upload" style="display: none" accept="image/*" onchange="displayNewImage(this)" name="user_image">
+
+            <!-- Hidden file input for old email -->
+            <input type="hidden" style="display: none" accept="image/*" onchange="displayNewImage(this)" value="{{ the_user.email }}" name="old_email">
+
+            <!-- Submit Button -->
+            <div class="col-4 mx-auto mt-4 mb-0 input-box text-center">
+                <input class="btn btn-primary btn-lg" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>    
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- This script is to fetch all country entry in the phone input. -->
+<script src="../../static/js/signin_phone_number/intlTelInput.js"></script>
+<script>
+  var input = document.querySelector("#phone");
+  window.intlTelInput(input,{})
+</script>
+
+<!-- This script is to prevent the user from deleteing the + sign in the phone input. -->
+<script>
+  const phoneInput = document.getElementById('phone');
+  
+  phoneInput.addEventListener('input', function(e) {
+    // Remove any non-digit characters from the input
+    const cleanedValue = this.value.replace(/\D/g, '');
+    
+    // Add the "+" symbol at the beginning of the cleaned value
+    this.value = '+' + cleanedValue;
+  });
+</script>
+
+<!-- This script is to fetch all country names in the country input. -->
+<script>
+    // Get the select element
+    var select = document.getElementById("country");
+  
+    // Fetch the list of countries from the API
+    fetch("https://countriesnow.space/api/v0.1/countries/info?returns=name")
+      .then(response => response.json())
+      .then(data => {
+        // Extract country names from the data
+        var countries = data.data.map(country => country.name);
+  
+        // Sort the countries alphabetically
+        countries = countries.sort((a, b) => a.localeCompare(b));
+  
+        // Loop through the sorted countries array and create an option for each country
+        countries.forEach(country => {
+          var option = document.createElement("option");
+          option.value = country;
+          option.text = country;
+  
+          // Set the 'selected' attribute if the country matches {{ the_address.country }}
+          if (country === "{{ the_address.country }}") {
+            option.selected = true;
+          }
+  
+          select.appendChild(option);
+        });
+      })
+      .catch(error => console.log(error));
+</script>
+
+<!-- This script is to preview the uploaded img. -->
+<script>
+    function uploadNewImage() {
+        // Trigger the click event of the hidden file input
+        document.getElementById('image-upload').click();
+    }
+
+    function displayNewImage(input) {
+        if (input.files && input.files[0]) {
+            // Get the selected file
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // Display the new image
+                document.getElementById('profile-img').src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+
+{%include 'general/footer.html'%}   
