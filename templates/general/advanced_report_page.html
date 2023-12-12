@@ -1,10 +1,12 @@
+{% set css_files = '<link rel="stylesheet" href="../../static/css/advanced_report_page.css">' %}
 {% include 'general/header.html' %} 
-    
-<div class="general-body min-vh-100">
-    <div class="container mt-5 mb-5 pt-5">
+
+
+<div class="mx-0 px-0 mw-100 my-5 pb-3 d-flex justify-content-center">
+    <div class="container mx-0 pt-5 px-1 px-sm-2 px-md-3 px-lg-4">
         <div>
             <h1 class="text-warning">Advanced Report:</h1>
-            <p class="text-light">This page contains a full report of all products with their corresponding quantity in each location.</p>
+            <p>This page contains a full report of all products with their corresponding quantity in each location.</p>
         </div>
         <div class="table-responsive">
             <table class="table custom-table table-hover report_table" id="table">
@@ -30,5 +32,6 @@
         </div>
     </div>
 </div>
+
 
 {%include 'general/footer.html'%}  
