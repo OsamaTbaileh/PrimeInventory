@@ -1,43 +1,44 @@
 {% include 'general/header.html' %} 
 
-  <div class="general-body min-vh-100">
-    <div class="container mt-5 mb-5 pt-5 ">
-      <div >
-        <h1 class="text-warning">Normal Report:</h1>
-        <p class="text-light">This page contains a full report of all products existing in all locations along with their quantities and other information.</p>
 
-      </div>
-      <div class="table-responsive">
-        <table class="table custom-table table-hover report_table" id="table">
-          <thead>
-            <tr class="table-head">
-              <th>Location ID</th>
-              <th>Location Name</th>
-              <th>Product ID</th>
-              <th>Product Name</th>
-              <th>Product Price $</th>
-              <th>Total In Qty</th>
-              <th>Total Out Qty</th>
-              <th>Total Qty</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for one_product in all_products %}
-            <tr>
-              <td>{{ one_product.location_id }}</td>
-              <td>{{ one_product.location_name }}</td>
-              <td>{{ one_product.product_id }}</td>
-              <td>{{ one_product.product_name }}</td>
-              <td>{{ one_product.price }}</td>
-              <td>{{ one_product.total_in_quantity }}</td>
-              <td>{{ one_product.total_out_quantity }}</td>
-              <td>{{ one_product.total_quantity }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+<div class="mx-0 px-0 mw-100 my-5 pb-3 d-flex justify-content-center">
+  <div class="container mx-0 pt-5 px-1 px-sm-2 px-md-3 px-lg-4">
+    <div >
+      <h1 class="text-warning">Normal Report:</h1>
+      <p>This page contains a full report of all products existing in all locations along with their quantities and other information.</p>
+    </div>
+    <div class="table-responsive">
+      <table class="table custom-table table-hover report_table" id="table">
+        <thead>
+          <tr class="table-head">
+            <th>Location ID</th>
+            <th>Location Name</th>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Product Price $</th>
+            <th>Total In Qty</th>
+            <th>Total Out Qty</th>
+            <th>Total Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for one_product in all_products %}
+          <tr>
+            <td>{{ one_product.location_id }}</td>
+            <td>{{ one_product.location_name }}</td>
+            <td>{{ one_product.product_id }}</td>
+            <td>{{ one_product.product_name }}</td>
+            <td>{{ one_product.price }}</td>
+            <td>{{ one_product.total_in_quantity }}</td>
+            <td>{{ one_product.total_out_quantity }}</td>
+            <td>{{ one_product.total_quantity }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
+</div>
+
 
 {%include 'general/footer.html'%}  
