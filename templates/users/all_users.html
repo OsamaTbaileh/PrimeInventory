@@ -1,0 +1,105 @@
+{% set css_files = '<link rel="stylesheet" href="../../static/css/all_users.css">' %}
+{% include 'general/header.html' %} 
+
+
+<div class="mx-0 px-0 mw-100 my-5 pb-3 d-flex justify-content-center">
+    <div class="w-100 mx-0 pt-5 px-3 px-sm-2 px-md-3 px-lg-4 bg" style="max-width: 1500px;">
+
+        <div class="row mx-auto p-0 mt-4 col-md-8 col-lg-6">
+            <div class="btn-group px-0 shaded-box rounded">
+                <button class="btn all-users-btn bg-light active-btn" data-user-type="all">All Users</button>
+                <button class="btn managers-btn bg-light" data-user-type="managers">Managers</button>
+                <button class="btn workers-btn bg-light" data-user-type="workers">Workers</button>       
+                <button class="btn new-workers-btn bg-light" data-user-type="new_workers">New Workers</button>           
+            </div>
+        </div>
+
+        <div id="users-container" class="row mx-auto my-4 col-md-12">
+        </div>
+
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- This script is to show the users based on the clicked button from the 4 buttons in the page. -->
+<script>
+    $(document).ready(function() {
+        // Initial page load, show all users
+        loadUsers('all');
+
+        // Button click event handling
+        $('.btn').on('click', function(e) {
+            e.preventDefault();
+            // Remove the 'active-btn' class from all buttons
+            $('.btn').removeClass('active-btn');
+            // Add 'active-btn' class to the clicked button
+            $(this).addClass('active-btn');
+            // Get the user type from the data attribute
+            var userType = $(this).data('user-type');
+            // Load users based on the clicked button
+            loadUsers(userType);
+        });
+
+        // Function to load users using AJAX
+        function loadUsers(userType) {
+            var url;
+            if (userType === 'managers') {
+                url = '/load_users/managers';
+            } else if (userType === 'workers') {
+                url = '/load_users/workers';
+            } else if (userType === 'new_workers') {
+                url = '/load_users/new_workers';
+            } else {
+                url = '/load_users/all';
+            }
+
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function(data) {
+                    // Empty the content of the users container
+                    $('#users-container').empty();
+                    // If there are no users to show:
+                    if (data === false) {
+                        $('#users-container').append(
+                            '<div class="row mx-auto p-3 col-md-9 bg-light rounded shaded-box d-flex justify-content-center">' +
+                                '<p class="text-danger text-center fw-bold">No users here for now.</p>' +
+                            '</div>'
+                        );
+                    }
+                    else{
+                        // Iterate through the users and create HTML elements
+                        for (var i = 0; i < data.length; i++) {
+                            var user = data[i];
+
+                            // Create a new user container
+                            var userContainer = $('<div class="col-12 col-sm-6 col-md-4 col-lg-3 custom-col p-0 m-0">' +
+                                                    '<div class="bg-light rounded d-flex flex-column align-items-center m-2 p-2 shaded-box">' +
+                                                        '<a aria-label="' + user.first_name + ' ' + user.last_name + '" href="/users/' + user.user_id + '" class="user-img-container p-0 my-2">' +
+                                                            '<img src="/static/uploads/users_photos/' + user.image_id + '" alt="' + user.first_name + ' ' + user.last_name + ' image" class="' + (user.job_title == 'Worker' ? 'worker' : (user.job_title == 'Manager' ? 'manager' : 'head-master')) + '-profile-img">' +
+                                                        '</a>' +
+                                                        '<div class="' + (user.job_title == 'Worker' ? 'worker' : (user.job_title == 'Manager' ? 'manager' : 'head-master')) + '-name-container">' +
+                                                            '<a class="text-center mb-1" href="/users/' + user.user_id + '">' + user.first_name + ' ' + user.last_name + '</a>' +
+                                                            '<h6 class="text-center fw-light mb-1">' + user.job_title + '</h6>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                '</div>');
+
+                            // Append the new user container to the users container
+                            $('#users-container').append(userContainer);
+                        }
+                    }
+                },
+                error: function(error) {
+                    console.error('Error loading users:', error);
+                    console.log('Response Text:', error.responseText);
+                }
+            });
+        }
+    });
+</script>
+
+
+{%include 'general/footer.html'%}   
