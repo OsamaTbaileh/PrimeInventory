@@ -1,128 +1,17 @@
-/* NavBar: */
-#neubar {
-    background: linear-gradient(to top right, rgba(43, 42, 42, 0.8), rgba(89, 88, 88, 0.8), rgba(43, 42, 42, 0.8));
-    border-bottom: 2px solid #b18953;
-    z-index: 99999;
-}
-
-#neubar .dropdown-menu a:hover {
-    color: #454545; 
-}
-
-#neubar .nav-item {
-    margin : auto 4px;
-}
-
-#neubar a {
-    padding-left:12px;
-    padding-right:12px;
-}
-
-#neubar .dropdown-menu {
-    background : #545454;
-}
-
-a.navbar-brand {
-    color: #454545;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 
-
-
-
-/* Slogan:                                  ///////////////////////////////////////////////////////////////////////////////////*/
-.gradient-bg {
-    /* background: linear-gradient(to top right, #1c1b1b, #6a6a6a); */
-    background-image: url("/static/img/sloganBackGround.jpg");
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: inset -10px 310px 100px -150px #b18953;
-}
-
-.centered-img {
-    max-width: 100%;
-    height: auto;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-    border-radius: 40px;
-}
-
-
-
-/* Our Vision & Mission Section:            ///////////////////////////////////////////////////////////////////////////////////*/
-.our-vision-section {
-    background-color: #f8f9fa;
-    padding: 60px 0;
-    opacity: 0; /* Set the opacity to 0 */
-    visibility: hidden; /* Hide the section initially */
-    transition: opacity 1s, visibility 1s;
-}
-
-
-
-/* About Us Section:                        ///////////////////////////////////////////////////////////////////////////////////*/
-.about-us-section {
-    background-color: #f8f9fa;
-    padding: 60px 0;
-    opacity: 0; /* Set the opacity to 0 */
-    visibility: hidden; /* Hide the section initially */
-    transition: opacity 1s, visibility 1s;
-}
-
-.about-us-image {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 30px;
-}
-
-
-
-/* Footer:                                  ///////////////////////////////////////////////////////////////////////////////////*/
-.footer {
-    background: linear-gradient(to top left, #7e002f, #1c000a);
-    /* background-color: #620024; */
-    color: #fff;
-    padding: 15px 0;
-    text-align: center;
-}
-
-.footer p {
-    margin-bottom: 0;
-}
-
-.social-icons a {
-    color: #fff;
-    font-size: 24px;
-    margin: 0 10px;
-    transition: transform 0.3s;
-}
-
-.social-icons a:hover {
-    transform: scale(1.2);
-}
-
-/* //////////////////////////////////////////////////////////////////////////////////// */
-
-.general-body{
-    background: linear-gradient(to top right,#1c000a, #393939, #6a6a6a);
-    box-shadow: inset -10px 310px 100px -150px #b18953;
-}
-
-.btn-container {
-text-align: center;
-margin-bottom: 20px;
-margin-top: 20px;
-position: fixed;
-right: 7%;
-z-index: 9999;
+body {
+    /* background: linear-gradient(to top right,#1c000a, #393939, #6a6a6a); */
+    background-color: #eaeef1 !important;
+    /* box-shadow: inset -10px 210px 90px -150px #b18953; */
 }
 
 .custom-table th {
 color: white;
 text-align: center; /* Center align the content */
 }
+
 .table-head{
     background: linear-gradient(to top right, #010101, #6a6a6a);
 }
@@ -137,34 +26,7 @@ text-align: center;
 }
 
 
-/* /////////////////////////////////////////////////////////////////////////////////////////////////// */
-/* locations */
-.card, .btn{
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .card:hover, .btn:hover{
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  .image-container {
-flex-grow: 1;
-display: flex;
-align-items: center;
-justify-content: center;
-overflow: hidden;
-max-height: 150px;
-}
-
-.image-container img {
-width: auto;
-height: 100%;
-object-fit: contain;
-max-width: 100%;
-}
-
 /* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */
-
 
 .golden-form-label{
     background: linear-gradient(to top right, #bb9158, #faf1b0);
@@ -176,7 +38,7 @@ max-width: 100%;
 
 .form-body{
     background: linear-gradient(to top right, #b8b6b4, #e3e3e3);
-    margin-top: 120px;
+    margin-top: 100px;
     border: 2px solid #bb9158;
 }
 
@@ -201,7 +63,7 @@ max-width: 100%;
 .golden-button:hover {
     color: rgba(255, 255, 255, 1);
     background: linear-gradient(to bottom left, #8d4800, #e5c970);
-    box-shadow: 0px 0px 20px 15px #bb9158;
+    box-shadow: 0px 0px 10px 7px #bb9158;
 }
 
 /* Red glowing button: */
@@ -232,69 +94,14 @@ max-width: 100%;
 .min-width-div {
     min-width: 150px;
 }
-  
 
 .general-body {
     display: inline-block;
     max-width: 100%;
     overflow-x: auto;
-  }
+}
 
 
 .blur {
     filter: blur(3px);
 }
-
-
-
-/* ///// filter form ///////////////////////////////////////////////////////////////// */
-
-.filter-form-container{
-    position: relative;
-    backdrop-filter: blur(8px); /* Apply a blur effect to the form container */
-    background-color: rgba(0, 0, 0, 0.25); /* Set a translucent background color */
-    border: 2px solid #bb9158;
-}
-
-.filter-button-style{
-    padding: 5px;
-    max-width: 120px;
-}
-
-/* //////////////////////////////////////////////////////////////////////////// */
-
-
-.filter-form-container {
-    font-size: 14px;
-  }
-
-  
-  .filter-form-container .col-form-label {
-    margin-bottom: 0; /* Remove bottom margin for the labels */
-  }
-  
-  .filter-form-container input[type="text"],
-  .filter-form-container select {
-    font-size: 14px; /* Adjust the font size if needed */
-  }
-  
-  .filter-form-container .btn-block {
-    width: 100%; /* Make the button fill the width */
-    margin-top: 0.5rem; /* Add margin-top to separate it from the inputs */
-  }
-
-
-/* For the advanced report //////////////////////////////////////////////////////////////////////////// */
-
-  .report_table td {
-    min-width: 120px; /* Adjust the width value as needed */
-}
-
-.fixed-column {
-    position: sticky;
-    left: 0;
-    background-color: #fff;
-    z-index: 1;
-}
-
-/* //////////////////////////////////////////////////////////////////////////// */
