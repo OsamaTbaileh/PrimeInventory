@@ -3,9 +3,9 @@ import pymysql.cursors
 # this class will give us an instance of a connection to our database
 class MySQLConnection:
     def __init__(self, db):
-        connection = pymysql.connect(host = 'localhost',
-                                    user = 'your_user_name',
-                                    password = 'your_password', 
+        connection = pymysql.connect(host = 'localhost',          # Add your host here.
+                                    user = 'your_user_name',      # Add your username here.
+                                    password = 'your_password',   # Add your password here.
                                     db = db,
                                     charset = 'utf8mb4',
                                     cursorclass = pymysql.cursors.DictCursor,
