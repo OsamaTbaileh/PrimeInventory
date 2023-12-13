@@ -63,7 +63,7 @@ This web application is specifically designed to assist store managers in effici
 <br/><br/>
 
 ## ERD:
-![ERD Diagram](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/ERD_diagram.jpg)
+![ERD Diagram](https://github.com/OsamaTbaileh/PrimeInventory/blob/main/static/assets/EER_diagram.jpg)
 
 <br/><br/>
 
