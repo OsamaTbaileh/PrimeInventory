@@ -16,6 +16,9 @@ This web application is specifically designed to assist store managers in effici
     - Higher permissions and privileges.
     - Can add, delete, and modify various entities (locations, products, etc.).
     - Can observe the movements of all products.
+  - Admin Account:
+    - Highest permissions and privileges.
+    - Can add delete users accounts.
 
 
 ## Programing Languages, Frameworks & Libraries Used:
