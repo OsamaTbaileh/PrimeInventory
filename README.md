@@ -18,7 +18,7 @@ This web application is specifically designed to assist store managers in effici
     - Can observe the movements of all products.
   - Admin Account:
     - Highest permissions and privileges.
-    - Can add delete users accounts.
+    - Can delete users accounts.
 
 
 ## Programing Languages, Frameworks & Libraries Used:
