@@ -3,7 +3,7 @@
 </div>
 
 ## Idea:
-This web application is specifically designed to assist store managers in efficiently managing multiple warehouses located in different cities and locations. Its primary purpose is to provide a streamlined solution for organizing products within these warehouses and effectively tracking the movement of each product. This includes monitoring the origin and destination of each product as it moves throughout the supply chain. By utilizing this application, store managers can optimize their inventory management processes, enhance operational efficiency, and maintain accurate records of product movement within their company's warehousing infrastructure.
+This web application is specifically designed to assist store managers in efficiently managing multiple warehouses located in different cities and locations. In addition to providing a streamlined solution for organizing products within these warehouses and tracking their movement, it also includes a feature for building teams composed of various workers and managers. By enabling collaboration among team members, the application enhances operational efficiency and optimizes inventory management processes. Moreover, it helps maintain accurate records of product movement within the company's warehousing infrastructure.
 
 
 ## Functional Specifications:
